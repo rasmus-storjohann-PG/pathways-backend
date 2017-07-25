@@ -1,3 +1,4 @@
+#!/bin/sh
 # TODO: Update this!!!
 BC211_DATA_PATH=/Users/tukrre/Documents/peacegeeks/bc211/iCarolExport-BC211-HSDS-20170721_170621
 
