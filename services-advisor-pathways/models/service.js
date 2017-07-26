@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ServiceSchema = new Schema({
-  id:  { type: String, required: true },
+  id:  { type: Number, required: true },
   organization_id: { type: String, required: true},
   program_id: String,
   name: { type: String, required: true },

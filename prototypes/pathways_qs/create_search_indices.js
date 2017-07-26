@@ -1,6 +1,4 @@
 db.getCollection('airs_taxonomies').dropIndexes()
-db.getCollection('sites').dropIndexes()
-
 db.getCollection('airs_taxonomies').createIndex(
     {
         "Code+B1": "text",
@@ -17,21 +15,20 @@ db.getCollection('airs_taxonomies').createIndex(
     }
 )
 
-db.getCollection('sites').createIndex(
+db.getCollection('service').dropIndexes()
+
+db.getCollection('service').createIndex(
     {
-        Name: "text",
-        SiteDescription: "text",
-        "SiteService.Description": "text"
+        name: "text",
+        description: "text",
+        alternate_name: "text"
     },
     {
         weights: {
-            Name: 3,
-            SiteDescription: 10,
-            "SiteService.Description": 10
+            name: 8,
+            description: 10,
+            alternate_name: 3
         },
         name: "TextIndex"
     }
 )
-
-db.getCollection('sites').createIndex({"SiteService.Taxonomy": 1})
-

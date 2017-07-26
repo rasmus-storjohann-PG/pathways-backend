@@ -12,9 +12,10 @@ var services = require('./routes/services');
 var pathways = require('./routes/pathways');
 
 var app = express();
-mongoose.connect('mongodb://localhost:28000/bc211');
+mongoose.connect('mongodb://peacegeeks:p34c3g33k$@ds159112.mlab.com:59112/bc211');
 //Get the default connection
 var db = mongoose.connection;
+mongoose.Promise = Promise;
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
