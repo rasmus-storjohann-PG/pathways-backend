@@ -1,6 +1,22 @@
 # Mapping to OpenReferral
 
+seems the following fields are not as easily mappable:
+`startDate`
+`endDate`
+`coverage`
+`availability`
+`referralMethod`
+`referralNextSteps`
+`feedbackMechanism`
+`feedbackDelay`
+`complaintsMechanism`
+`additionalDetails`
+`comments`
+
+**Here is how it may look:**
+
 ## Legacy Services Advisor JSON Format (Jordan/Turkey)
+
 ```json
 {
 	"id": "319",
@@ -10,19 +26,19 @@
 		"alt": ""
 	},
 	"region": "Education: Altındağ: 319",
-	"xstartDate": "2017-01-01",
-	"xendDate": "2017-12-31",
+	"startDate": "2017-01-01",
+	"endDate": "2017-12-31",
 	"serviceName": "Education: Altındağ: 319",
-	"xnationality": "Syrians, Other nationalities",
+	"XXXnationality": "Syrians, Other nationalities",
 	"intakeCriteria": "Children 6 up to 12 y/o, Children 13 to 17 y/o, Children out of school",
 	"accessibility": "Visits by outreach staff and volunteers, Walk-in",
-	"xcoverage": "Province where the service is located",
-	"xavailability": "Monthly",
+	"coverage": "Province where the service is located",
+	"availability": "Monthly",
 	"referralMethod": "Referral is not required",
 	"referralNextSteps": "",
-	"xfeedbackMechanism": "",
-	"xfeedbackDelay": "",
-	"xcomplaintsMechanism": "Central email for complaints / suggestions, Direct complaint to service provider",
+	"feedbackMechanism": "",
+	"feedbackDelay": "",
+	"complaintsMechanism": "Central email for complaints / suggestions, Direct complaint to service provider",
 	"LegalDocumentsRequired": "Copy of Turkish Registration ID card (TP/ IP / Residence Permit), Pre-registration document delivered by DGMM",
 	"location": {
 		"geometry": ""
@@ -31,14 +47,14 @@
 		"geometry": "{\"type\":\"Point\",\"coordinates\":[32.934420704842,39.960653239606]}"
 	},
 	"category": "Education",
-	"xservicesProvided": "Education›Education opportunities›Offer education outreach›Information on enrolment in education programmes||Education›Education opportunities›Provide education assistance›School supplies||Education›Education opportunities›Provide informal education›Provide catch-up/ supplementary instruction programmes in Turkish||Education›Education opportunities›Provide language classes›Turkish classes for children||Education›Education opportunities›Provide transportation for education›Provide transportation to education activities||Education›Education opportunities›Recreational activities›Recreational activities for children",
-	"xsubCategory": "Education opportunities",
+	"servicesProvided": "Education›Education opportunities›Offer education outreach›Information on enrolment in education programmes||Education›Education opportunities›Provide education assistance›School supplies||Education›Education opportunities›Provide informal education›Provide catch-up/ supplementary instruction programmes in Turkish||Education›Education opportunities›Provide language classes›Turkish classes for children||Education›Education opportunities›Provide transportation for education›Provide transportation to education activities||Education›Education opportunities›Recreational activities›Recreational activities for children",
+	"subCategory": "Education opportunities",
 	"officeHours": "Monday: 09:00-12:00, 13:00-17:00|Tuesday: 09:00-12:00, 13:00-17:00|Wednesday: 09:00-12:00, 13:00-17:00|Thursday: 09:00-12:00, 13:00-17:00|Friday: 09:00-12:00, 13:00-17:00|",
 	"hotlinePhone": "2242223221",
 	"infoLink": "https://ar-ar.facebook.com/mhpss.uossm/",
 	"publicAddress": "Battalgazi Mah. Bostancik Cad. 980. Sok. No:6 Altindag/Ankara. Educational Activities will take place in ASAM centers.",
-	"xadditionalDetails": "There will be two different sections for the classes (morning and afternoon) consist of 4 class hours each working day. Educational activities will take place in ASAM centers.",
-	"xcomments": "For complaints and suggestions, please email nrc.feedback.turkey@nrc.no"
+	"additionalDetails": "There will be two different sections for the classes (morning and afternoon) consist of 4 class hours each working day. Educational activities will take place in ASAM centers.",
+	"comments": "For complaints and suggestions, please email nrc.feedback.turkey@nrc.no"
 }
 ```
 
