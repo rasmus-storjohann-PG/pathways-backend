@@ -1,18 +1,18 @@
 # Mapping to OpenReferral
 
 seems the following fields are not as easily mappable:
-`startDate`
-`endDate`
-`coverage`
-`nationality`
-`availability`
-`referralMethod`
-`referralNextSteps`
-`feedbackMechanism`
-`feedbackDelay`
-`complaintsMechanism`
-`additionalDetails`
-`comments`
+* `startDate`
+* `endDate`
+* `coverage`
+* `nationality`
+* `availability`
+* `referralMethod`
+* `referralNextSteps`
+* `feedbackMechanism`
+* `feedbackDelay`
+* `complaintsMechanism`
+* `additionalDetails`
+* `comments`
 
 **Here is how it may look:**
 
