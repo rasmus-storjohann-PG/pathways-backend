@@ -5,7 +5,7 @@ It seems the following fields are not as easily mappable:
 * `endDate` - seems this doesn't really exist for OpenReferral
 * `nationality` - can probably cover this with eligibility
 * `availability` - probably dont really need this
-* `referralMethod` - can probably cover this with eligibility
+* `referralMethod` - no really way to do this
 * `referralNextSteps`
 * `feedbackMechanism` - perhaps should be more on the feedback side?
 * `feedbackDelay` - perhaps should be more on the feedback side?
