@@ -132,7 +132,7 @@ seems the following fields are not as easily mappable:
     "id" : "10",
     "service_id" : "319",
     "organization_id" : "21",
-    "contact_id" : 9487385,
+    "contact_id" : "500",
     "number" : "224-222-3221",
     "extension" : "",
     "type" : "",
