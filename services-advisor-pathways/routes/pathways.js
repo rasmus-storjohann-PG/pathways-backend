@@ -42,12 +42,17 @@ function getServicesMatchingKeywords(keywords, limit){
   return services
 }
 
+/* GET users listing. */
+router.get('/', function(req, res) {
+  // TODO: maybe this should be required?
+  res.render('pathways', { title: 'Pathways', })
+});
 
 /* GET users listing. */
 router.post('/', function(req, res) {
   // TODO: maybe this should be required?
   var keywords = req.body.keywords;
-  var limit = req.body.limit;
+  var limit = parseInt(req.body.limit);
   getServicesMatchingKeywords(keywords, limit).then(function(services){
     res.send(services);
   })
