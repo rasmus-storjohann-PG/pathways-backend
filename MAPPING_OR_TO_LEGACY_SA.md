@@ -30,7 +30,7 @@ seems the following fields are not as easily mappable:
 	"startDate": "2017-01-01",
 	"endDate": "2017-12-31",
 	"serviceName": "Education: Altındağ: 319",
-	"XXXnationality": "Syrians, Other nationalities",
+	"nationality": "Syrians, Other nationalities",
 	"intakeCriteria": "Children 6 up to 12 y/o, Children 13 to 17 y/o, Children out of school",
 	"accessibility": "Visits by outreach staff and volunteers, Walk-in",
 	"coverage": "Province where the service is located",
