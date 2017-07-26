@@ -1,6 +1,6 @@
 # Mapping to OpenReferral
 
-seems the following fields are not as easily mappable:
+It seems the following fields are not as easily mappable:
 * `startDate` - seems this doesn't really exist for OpenReferral
 * `endDate` - seems this doesn't really exist for OpenReferral
 * `nationality` - can probably cover this with eligibility
