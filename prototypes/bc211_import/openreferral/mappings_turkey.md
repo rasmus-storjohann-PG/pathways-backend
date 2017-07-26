@@ -1,4 +1,6 @@
-Turkey JSON Format
+# Mapping to OpenReferral
+
+## Legacy Services Advisor JSON Format (Jordan/Turkey)
 ```json
 {
 	"id": "319",
@@ -40,9 +42,9 @@ Turkey JSON Format
 }
 ```
 
-In OpenReferral
+## Proposed OpenReferral Format
 
-## service
+### service
 ```json
 {
     "id" : "319",
@@ -57,7 +59,7 @@ In OpenReferral
     "wait_time" : ""
 }
 ```
-## organization
+### organization
 ```json
 {
     "id" : "21",
@@ -71,19 +73,19 @@ In OpenReferral
     "year_incorporated" : ""
 }
 ```
-## service_area
+### service_area
 ```json
 {
-    "id" : 93968524,
+    "id" : "5115",
     "service_id" : "319",
     "service_area" : "Turkey;Altındağ"
 }
 ```
-## required_document
+### required_document
 ```json
 [
     {
-        "id" : 9491324,
+        "id" : "131",
         "service_id" : "319",
         "document" : "Copy of Turkish Registration ID card (TP/ IP / Residence Permit)"
     },
@@ -94,7 +96,7 @@ In OpenReferral
     }
 ]
 ```
-## location
+### location
 ```json
 {
     "id" : "10",
@@ -107,10 +109,10 @@ In OpenReferral
     "description" : ""
 }
 ```
-## phone
+### phone
 ```json
 {
-    "id" : 9487385,
+    "id" : "10",
     "service_id" : "319",
     "organization_id" : "21",
     "contact_id" : 9487385,
@@ -121,7 +123,7 @@ In OpenReferral
     "country_prefix" : 1
 }
 ```
-## physical_address
+### physical_address
 ```json
 {
     "id" : "50",
@@ -137,7 +139,7 @@ In OpenReferral
     "country" : "Turkey"
 }
 ```
-## eligibility
+### eligibility
 ```json
 {
     "id" : "501",
@@ -145,7 +147,7 @@ In OpenReferral
     "eligibility" : "Children 6 up to 12 y/o, Children 13 to 17 y/o, Children out of school"
 }
 ```
-## taxonomy
+### taxonomy
 ```json
 [
     {
@@ -206,7 +208,7 @@ In OpenReferral
     }
 ]
 ```
-## regular_schedule
+### regular_schedule
 ```json
 [
     {
