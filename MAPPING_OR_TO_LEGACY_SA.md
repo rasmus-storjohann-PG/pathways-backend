@@ -4,6 +4,7 @@ seems the following fields are not as easily mappable:
 `startDate`
 `endDate`
 `coverage`
+`nationality`
 `availability`
 `referralMethod`
 `referralNextSteps`
