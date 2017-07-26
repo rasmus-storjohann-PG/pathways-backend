@@ -1,18 +1,17 @@
 # Mapping to OpenReferral
 
 seems the following fields are not as easily mappable:
-* `startDate`
-* `endDate`
-* `coverage`
-* `nationality`
+* `startDate` - seems this doesn't really exist for OpenReferral
+* `endDate` - seems this doesn't really exist for OpenReferral
+* `nationality` - can probably cover this with eligibility
 * `availability`
-* `referralMethod`
+* `referralMethod` - can probably cover this with eligibility
 * `referralNextSteps`
-* `feedbackMechanism`
-* `feedbackDelay`
-* `complaintsMechanism`
-* `additionalDetails`
-* `comments`
+* `feedbackMechanism` - perhaps should be more on the feedback side?
+* `feedbackDelay` - perhaps should be more on the feedback side?
+* `complaintsMechanism` - perhaps should be more on the feedback side?
+* `additionalDetails` - can probably cover this with service.description
+* `comments` - can probably cover with service.description
 
 **Here is how it may look:**
 
