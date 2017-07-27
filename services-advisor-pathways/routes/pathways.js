@@ -1,6 +1,7 @@
 var express = require('express');
 var AirsTaxonomy = require('../models/airs_taxonomy');
 var Service = require('../models/service');
+var ServiceArea = require('../models/service_area');
 var ServiceTaxonomy = require('../models/service_taxonomy');
 var router = express.Router();
 
@@ -41,6 +42,13 @@ function getServicesMatchingKeywords(keywords, limit){
 
   return services
 }
+
+
+router.get('/service_areas', function(req, res){
+  ServiceArea.find({}).exec().then(function(results){
+    res.send(Array.from(new Set(results.map(function(e){return e.service_area}))));
+  })
+});
 
 /* GET users listing. */
 router.get('/', function(req, res) {

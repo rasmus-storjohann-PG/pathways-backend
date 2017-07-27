@@ -4,6 +4,10 @@ block content
   h1= title
   p Welcome to #{title}
   form(action='/pathways',method='post')
+
+    div(data-role='fieldcontain')
+    fieldset(data-role='controlgroup')
+      label(for='location') location
     div(data-role='fieldcontain')
     fieldset(data-role='controlgroup')
       label(for='keywords') keywords
