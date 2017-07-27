@@ -1,17 +1,17 @@
 # Mapping to OpenReferral
 
-seems the following fields are not as easily mappable:
-`startDate`
-`endDate`
-`coverage`
-`availability`
-`referralMethod`
-`referralNextSteps`
-`feedbackMechanism`
-`feedbackDelay`
-`complaintsMechanism`
-`additionalDetails`
-`comments`
+It seems the following fields are not as easily mappable:
+* `startDate` - seems this doesn't really exist for OpenReferral
+* `endDate` - seems this doesn't really exist for OpenReferral
+* `nationality` - can probably cover this with eligibility
+* `availability` - probably dont really need this
+* `referralMethod` - no really way to do this
+* `referralNextSteps`
+* `feedbackMechanism` - perhaps should be more on the feedback side?
+* `feedbackDelay` - perhaps should be more on the feedback side?
+* `complaintsMechanism` - perhaps should be more on the feedback side?
+* `additionalDetails` - can probably cover this with service.description
+* `comments` - can probably cover with service.description
 
 **Here is how it may look:**
 
@@ -29,7 +29,7 @@ seems the following fields are not as easily mappable:
 	"startDate": "2017-01-01",
 	"endDate": "2017-12-31",
 	"serviceName": "Education: Altındağ: 319",
-	"XXXnationality": "Syrians, Other nationalities",
+	"nationality": "Syrians, Other nationalities",
 	"intakeCriteria": "Children 6 up to 12 y/o, Children 13 to 17 y/o, Children out of school",
 	"accessibility": "Visits by outreach staff and volunteers, Walk-in",
 	"coverage": "Province where the service is located",
@@ -131,7 +131,7 @@ seems the following fields are not as easily mappable:
     "id" : "10",
     "service_id" : "319",
     "organization_id" : "21",
-    "contact_id" : 9487385,
+    "contact_id" : "500",
     "number" : "224-222-3221",
     "extension" : "",
     "type" : "",
