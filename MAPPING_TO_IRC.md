@@ -1,3 +1,9 @@
+# Mapping to OpenReferral
+Unknowns:
+* Translations?
+
+## IRC Refugee.info JSON Format (Germany)
+
 ```json
 {
         "additional_info": "",
@@ -178,6 +184,7 @@
 ```
 
 ## Proposed OpenReferral Format
+
 ### service
 ```json
 {
