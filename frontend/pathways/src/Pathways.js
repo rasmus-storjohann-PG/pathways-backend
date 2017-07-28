@@ -32,7 +32,7 @@ const Pathways = React.createClass({
   render() {
     return (
       <Panel>
-        <Form>
+        <Form action='http://localhost:3000/pathways' method='post'>
           <FormGroup controlId="pathwaysForm">
             <ControlLabel>Location</ControlLabel>
             <ServiceAreas />
