@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Pathways from './Pathways';
+import Pathways from './components/Pathways';
 import './index.css';
 
 ReactDOM.render(

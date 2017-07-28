@@ -1,9 +1,7 @@
-var express = require('express');
 var AirsTaxonomy = require('../models/airs_taxonomy');
 var Service = require('../models/service');
 var ServiceArea = require('../models/service_area');
 var ServiceTaxonomy = require('../models/service_taxonomy');
-var router = express.Router();
 
 function getServicesMatchingKeywords(keywords, limit){
   //TODO: Figure out how to prioritize the taxonomies based on the search relevance
@@ -42,28 +40,4 @@ function getServicesMatchingKeywords(keywords, limit){
 
   return services
 }
-
-
-router.get('/service_areas', function(req, res){
-  ServiceArea.find({}).exec().then(function(results){
-    res.send(Array.from(new Set(results.map(function(e){return e.service_area}))));
-  })
-});
-
-/* GET users listing. */
-router.get('/', function(req, res) {
-  // TODO: maybe this should be required?
-  res.render('pathways', { title: 'Pathways', })
-});
-
-/* GET users listing. */
-router.post('/', function(req, res) {
-  // TODO: maybe this should be required?
-  var keywords = req.body.keywords;
-  var limit = parseInt(req.body.limit);
-  getServicesMatchingKeywords(keywords, limit).then(function(services){
-    res.send(services);
-  })
-});
-
-module.exports = router;
+module.exports.getServicesMatchingKeywords = getServicesMatchingKeywords;
