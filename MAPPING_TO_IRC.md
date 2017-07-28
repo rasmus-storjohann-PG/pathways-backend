@@ -220,5 +220,5 @@
         "website": "",
         "wednesday_close": "18:30:00",
         "wednesday_open": "16:30:00"
-    },
+}
 ```
