@@ -1,5 +1,5 @@
 {
-  "name": "pathways-web",
+  "name": "pathways-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

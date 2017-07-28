@@ -1,10 +1,12 @@
 {
-  "name": "api",
+  "name": "pathways-backend",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.17.2",
     "cookie-parser": "~1.4.3",
@@ -17,6 +19,15 @@
     "morgan": "~1.8.1",
     "nodemon": "^1.11.0",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "swagger-express-mw": "^0.1.0"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "swagger project test"
   }
 }
