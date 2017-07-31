@@ -17,6 +17,6 @@ var ServiceSchema = new Schema({
   accreditations: String,
   licenses: String,
   taxonomy_ids: String
-}, { collection : 'service' });
+}, {collection: 'service', validateBeforeSave:false});
 
 module.exports = mongoose.model('Service', ServiceSchema );

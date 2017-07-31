@@ -72,7 +72,6 @@ function seedDatabaseFrom211(){
         readFromCsv(csvFile, collection, model);
       }
     });
-    mongoose.connection.close();
   })
 }
 

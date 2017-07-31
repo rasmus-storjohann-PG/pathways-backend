@@ -26,18 +26,9 @@ function addContact(req, res){
 }
 
 function getContact(req, res){
-  // console.log(req.swagger.params)
   var contactId = req.swagger.params.contact_id.value;
-  console.log(typeof contactId);
-  // console.log(typeof contactId);
-  Contact.findOne({id: contactId}, {_id: 0}).then(function(contactR){
-    res.json(new Array(contactR));
-
-    // if (contact){
-    //   res.json(result);
-    // } else{
-    //   res.status(404).send("Sorry can't find that!")
-    // }
+  Contact.findOne({id: contactId}, {_id: 0}).then(function(contact){
+    res.json(new Array(contact));
   });
 }
 
