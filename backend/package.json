@@ -13,6 +13,7 @@
     "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "fast-csv": "^2.4.0",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.3",
     "mongoose-aliasfield": "^0.3.7",

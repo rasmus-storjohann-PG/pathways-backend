@@ -12,4 +12,4 @@ var MetadataSchema = new Schema({
   updated_by: { type: String, required: true }
 }, { collection : 'metadata' });
 
-module.exports = mongoose.model('MetaTableDescription', MetaTableDescriptionSchema );
+module.exports = mongoose.model('MetadataSchema', MetadataSchema );

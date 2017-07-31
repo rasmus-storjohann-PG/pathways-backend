@@ -16,7 +16,13 @@ var config = {
   appRoot: __dirname // required config
 };
 
-mongoose.connect('mongodb://peacegeeks:p34c3g33k$@ds159112.mlab.com:59112/bc211');
+var mongoUri = process.env.PATHWAYS_MONGO_URI
+if (!mongoUri){
+  console.error("Error!!!! Set PATHWAYS_MONGO_URI environment var!");
+  process.exit();
+}
+mongoose.connect(mongoUri);
+
 //Get the default connection
 var db = mongoose.connection;
 mongoose.Promise = Promise;
@@ -39,25 +45,6 @@ app.use(cors())
 
 app.use('/', index);
 app.use('/pathways', pathways);
-
-// TODO: These are conflicting with swagger...
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-//
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
