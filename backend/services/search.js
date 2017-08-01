@@ -3,6 +3,32 @@ var Service = require('../models/service');
 var ServiceArea = require('../models/service_area');
 var ServiceTaxonomy = require('../models/service_taxonomy');
 
+module.exports = {
+  getServicesMatchingKeywords: getServicesMatchingKeywords,
+  listDocuments: listDocuments,
+  getDocument: getDocument
+}
+
+function listDocuments(req, res, model){
+  var page = req.swagger.params.page.value;
+  var per_page = req.swagger.params.per_page.value;
+  var skip = per_page * (page - 1)
+
+  model.find({}, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
+  .then(
+    function(results){
+      res.json(results);
+    }
+  );
+}
+
+function getDocument(req, res, model, primaryKey){
+  var primaryVal = req.swagger.params[primaryKey].value;
+  model.findOne({id: primaryVal}, {_id: 0, __v: 0}).then(function(doc){
+    res.json(new Array(doc));
+  });
+}
+
 function getServicesMatchingKeywords(keywords, limit){
   //TODO: Figure out how to prioritize the taxonomies based on the search relevance
 
@@ -40,4 +66,3 @@ function getServicesMatchingKeywords(keywords, limit){
 
   return services
 }
-module.exports.getServicesMatchingKeywords = getServicesMatchingKeywords;

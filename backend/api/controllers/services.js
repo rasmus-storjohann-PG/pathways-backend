@@ -1,5 +1,7 @@
 'use strict';
 var Service = require('../../models/service');
+var listDocuments = require('../../services/search').listDocuments;
+var getDocument = require('../../services/search').getDocument;
 
 module.exports = {
   listServices: listServices,
@@ -7,21 +9,9 @@ module.exports = {
 };
 
 function listServices(req, res) {
-  var page = req.swagger.params.page.value;
-  var per_page = req.swagger.params.per_page.value;
-  var skip = per_page * (page - 1)
-
-  Service.find({}, {_id: 0}).skip(skip).limit(per_page) // pagination
-  .then(
-    function(results){
-      res.json(results);
-    }
-  );
+  listDocuments(req, res, Service)
 }
 
 function getService(req, res){
-  var serviceId = req.swagger.params.service_id.value;
-  Service.findOne({id: serviceId}, {_id: 0}).then(function(service){
-    res.json(new Array(service));
-  });
+  getDocument(req, res, Service, 'service_id');
 }
