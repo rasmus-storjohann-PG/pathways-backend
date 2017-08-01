@@ -2675,6 +2675,7 @@ paths:
             items:
               $ref: "#/definitions/service"
   /services/{service_id}/contacts/:
+    x-swagger-router-controller: services
     get:
       summary: Get Contacts
       description: Get Contacts
@@ -2721,6 +2722,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/contacts/{contact_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Contact
       description: Get Contact
@@ -2804,6 +2806,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/eligibility/:
+    x-swagger-router-controller: services
     get:
       summary: Get Eligibilities
       description: Get Eligibilities
@@ -2850,6 +2853,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/eligibility/{eligibility_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Eligibility
       description: Get Eligibility
@@ -2933,6 +2937,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/fees/:
+    x-swagger-router-controller: services
     get:
       summary: Get Fees
       description: Get Fees
@@ -2978,7 +2983,8 @@ paths:
               $ref: "#/definitions/fee"
       tags:
       - Services
-  /services/{service_id}/fees/{feed_id}/:
+  /services/{service_id}/fees/{fee_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Fee
       description: Get Fee
@@ -2992,7 +2998,7 @@ paths:
         - in: path
           required: true
           type: string
-          name: feed_id
+          name: fee_id
           description: 'The unique feed id.'
       responses:
         '200':
@@ -3016,7 +3022,7 @@ paths:
         - in: path
           required: true
           type: string
-          name: feed_id
+          name: fee_id
           description: 'The unique feed id.'
         - in: body
           name: body
@@ -3047,7 +3053,7 @@ paths:
         - in: path
           required: true
           type: string
-          name: feed_id
+          name: fee_id
           description: 'The unique feed id.'
       security:
         - appid: []
@@ -3062,6 +3068,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/funding/:
+    x-swagger-router-controller: services
     get:
       summary: Get Funding
       description: Get Funding
@@ -3108,6 +3115,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/funding/{funding_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Funding
       description: Get Funding
@@ -3191,6 +3199,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/holiday-schedule/:
+    x-swagger-router-controller: services
     get:
       summary: Get Holiday Schedule
       description: Get Holiday Schedule
@@ -3237,6 +3246,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/holiday-schedule/{holiday_schedule_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Holiday Schedule
       description: Get Holiday Schedule
@@ -3320,6 +3330,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/languages/:
+    x-swagger-router-controller: services
     get:
       summary: Get Languages
       description: Get Languages
@@ -3363,6 +3374,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/languages/{language_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Languages
       description: Get Languages
@@ -3446,6 +3458,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/payment-accepted/:
+    x-swagger-router-controller: services
     get:
       summary: Get Payment Accepted
       description: Get Payment Accepted
@@ -3492,6 +3505,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/payment-accepted/{payment_accepted_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Payment Accepted
       description: Get Payment Accepted
@@ -3575,6 +3589,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/phones/:
+    x-swagger-router-controller: services
     get:
       summary: Get Phones
       description: Get Phones
@@ -3621,6 +3636,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/phones/{phone_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Phone
       description: get Phone
@@ -3704,6 +3720,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/regular-schedule/:
+    x-swagger-router-controller: services
     get:
       summary: Get Regular Schedule
       description: Get Regular Schedule
@@ -3750,6 +3767,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/regular-schedule/{regular_schedule_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Regular Schedule
       description: Get Regular Schedule
@@ -3833,6 +3851,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/required-document/:
+    x-swagger-router-controller: services
     get:
       summary: Get Required Document
       description: Get Required Document
@@ -3879,6 +3898,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/required-document/{required_document_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Required Document
       description: Get Required Document
@@ -3962,6 +3982,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/service-area/:
+    x-swagger-router-controller: services
     get:
       summary: Get Service Areas
       description: Get Service Areas
@@ -4008,6 +4029,7 @@ paths:
       tags:
       - Services
   /services/{service_id}/service-area/{service_area_id}/:
+    x-swagger-router-controller: services
     get:
       summary: Get Service Area
       description: Get Service Area

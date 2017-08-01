@@ -1,17 +1,12 @@
 'use strict';
 var Location = require('../../models/location');
-var listDocuments = require('../helpers/search').listDocuments;
-var getDocument = require('../helpers/search').getDocument;
+var SearchHelper = require('../helpers/search');
 
 module.exports = {
-  listLocations: listLocations,
-  getLocation: getLocation,
+  listLocations: function (req, res) {
+    SearchHelper.listDocuments(req, res, Location)
+  },
+  getLocation: function (req, res){
+    SearchHelper.getDocument(req, res, Location, 'location_id');
+  }
 };
-
-function listLocations(req, res) {
-  listDocuments(req, res, Location)
-}
-
-function getLocation(req, res){
-  getDocument(req, res, Location, 'location_id');
-}

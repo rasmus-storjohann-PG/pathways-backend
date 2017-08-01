@@ -1,17 +1,12 @@
 'use strict';
 var Organization = require('../../models/organization');
-var listDocuments = require('../helpers/search').listDocuments;
-var getDocument = require('../helpers/search').getDocument;
+var SearchHelper = require('../helpers/search');
 
 module.exports = {
-  listOrganizations: listOrganizations,
-  getOrganization: getOrganization,
+  listOrganizations: function (req, res) {
+    SearchHelper.listDocuments(req, res, Organization)
+  },
+  getOrganization: function (req, res){
+    SearchHelper.getDocument(req, res, Organization, 'organization_id');
+  }
 };
-
-function listOrganizations(req, res) {
-  listDocuments(req, res, Organization)
-}
-
-function getOrganization(req, res){
-  getDocument(req, res, Organization, 'organization_id');
-}

@@ -1,59 +1,37 @@
 'use strict';
 var Contact = require('../../models/contact');
 var Phone = require('../../models/phone');
-var listDocuments = require('../helpers/search').listDocuments;
-var getDocument = require('../helpers/search').getDocument;
+var SearchHelper = require('../helpers/search');
 
 module.exports = {
-  listContacts: listContacts,
-  getContact: getContact,
-  listContactPhones: listContactPhones,
-  getContactPhone: getContactPhone
+  listContacts: function (req, res) {
+    SearchHelper.listDocuments(req, res, Contact)
+  },
+  getContact: function (req, res){
+    SearchHelper.getDocument(req, res, Contact, 'contact_id');
+  },
+  listContactPhones: function (req, res){
+    SearchHelper.listRelatedDocuments(req, res, Phone, 'contact_id');
+  },
+  getContactPhone: function (req, res){
+    SearchHelper.getRelatedDocument(req, res, Phone, 'phone_id', 'contact_id');
+  },
+  addContact: function (req, res){
+    res.status(501).send("Not implemented")
+  },
+  updateContact: function (req, res){
+    res.status(501).send("Not implemented")
+  },
+  deleteContact: function (req, res){
+    res.status(501).send("Not implemented")
+  },
+  addContactPhone: function (req, res){
+    res.status(501).send("Not implemented")
+  },
+  updateContactPhone: function (req, res){
+    res.status(501).send("Not implemented")
+  },
+  deleteContactPhone: function (req, res){
+    res.status(501).send("Not implemented")
+  }
 };
-
-function listContacts(req, res) {
-  listDocuments(req, res, Contact)
-}
-
-function getContact(req, res){
-  getDocument(req, res, Contact, 'contact_id');
-}
-
-function addContact(req, res){
-  res.status(501).send("Not implemented")
-}
-
-function updateContact(req, res){
-  res.status(501).send("Not implemented")
-}
-
-function deleteContact(req, res){
-  res.status(501).send("Not implemented")
-}
-
-function listContactPhones(req, res){
-  var contactId = req.swagger.params.contact_id.value;
-  Phone.find({contact_id: contactId}, {_id: 0}).then(function(phones){
-    res.json(phones);
-  });
-}
-
-function addContactPhone(req, res){
-  res.status(501).send("Not implemented")
-}
-
-function getContactPhone(req, res){
-  var contactId = req.swagger.params.contact_id.value;
-  var phoneId = req.swagger.params.phone_id.value;
-  Phone.findOne({id: phoneId, contact_id: contactId}).then(function(contact){
-    res.json(new Array(contact));
-  });
-}
-
-function updateContactPhone(req, res){
-  res.status(501).send("Not implemented")
-}
-
-function deleteContactPhone(req, res){
-  res.status(501).send("Not implemented")
-}
