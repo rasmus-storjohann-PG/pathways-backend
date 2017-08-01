@@ -29,7 +29,7 @@ paths:
           name: query
           required: false
           type: array
-          description: A query to filter results by.
+          description: A query to filter results by (e.g. <field>==<value>). Multiple entries are allowed.
           collectionFormat: multi
           items:
             type: string
