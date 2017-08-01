@@ -6,7 +6,8 @@ var parseQueryParameters = require('../../services/filtering').parseQueryParamet
 module.exports = {
   listContacts: listContacts,
   getContact: getContact,
-  listContactPhones: listContactPhones
+  listContactPhones: listContactPhones,
+  getContactPhone: getContactPhone
 };
 
 function listContacts(req, res) {
