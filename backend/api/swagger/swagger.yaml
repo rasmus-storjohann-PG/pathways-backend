@@ -26,9 +26,13 @@ paths:
       operationId: listContacts
       parameters:
         - in: query
-          type: number
           name: query
-          description: A query to filter list by.
+          required: false
+          type: array
+          description: A query to filter results by.
+          collectionFormat: multi
+          items:
+            type: string
         - in: query
           type: number
           name: page
@@ -2499,6 +2503,7 @@ paths:
       tags:
       - Search
   /services/:
+    x-swagger-router-controller: services
     get:
       summary: Get Services
       description: Get Services

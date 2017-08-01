@@ -1,5 +1,6 @@
 'use strict';
 var Contact = require('../../models/contact');
+var parseQueryParameters = require('../../services/filtering').parseQueryParameters;
 
 module.exports = {
   listContacts: listContacts,
@@ -7,13 +8,12 @@ module.exports = {
 };
 
 function listContacts(req, res) {
-  var query = req.swagger.params.query.value;
-  console.log(query);
+  var query = parseQueryParameters(req.swagger.params.query.value);
   var page = req.swagger.params.page.value;
   var per_page = req.swagger.params.per_page.value;
   var skip = per_page * (page - 1)
 
-  Contact.find({}, {_id: 0}).skip(skip).limit(per_page) // pagination
+  Contact.find(query, {_id: 0}).skip(skip).limit(per_page) // pagination
   .then(
     function(results){
       res.json(results);

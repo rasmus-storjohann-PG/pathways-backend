@@ -26,7 +26,7 @@ function getServicesMatchingKeywords(keywords, limit){
         }
     ).exec()
   }).then(function(results){
-    var serviceTaxonomies = results.map(function(elem){return parseInt(elem.service_id)})
+    var serviceTaxonomies = results.map(function(elem){return elem.service_id})
     return Service.find(
         {
             id: {$in: serviceTaxonomies},
