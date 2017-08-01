@@ -206,7 +206,7 @@ paths:
           description: The unique phone id.
       responses:
         '200':
-          description: Contact Response
+          description: Phone Response
           schema:
             type: array
             items:
@@ -277,6 +277,14 @@ paths:
       description: Get Locations
       operationId: listLocations
       parameters:
+        - in: query
+          name: query
+          required: false
+          type: array
+          description: A query to filter results by (e.g. <field>==<value>). Multiple entries are allowed.
+          collectionFormat: multi
+          items:
+            type: string
         - in: query
           type: number
           name: page
@@ -1416,11 +1424,20 @@ paths:
       tags:
       - Locations
   /organizations/:
+    x-swagger-router-controller: organizations
     get:
       summary: Get Organizations
       description: Get Organizations
       operationId: listOrganizations
       parameters:
+        - in: query
+          name: query
+          required: false
+          type: array
+          description: A query to filter results by (e.g. <field>==<value>). Multiple entries are allowed.
+          collectionFormat: multi
+          items:
+            type: string
         - in: query
           type: number
           name: page
@@ -2509,6 +2526,14 @@ paths:
       description: Get Services
       operationId: listServices
       parameters:
+        - in: query
+          name: query
+          required: false
+          type: array
+          description: A query to filter results by (e.g. <field>==<value>). Multiple entries are allowed.
+          collectionFormat: multi
+          items:
+            type: string
         - in: query
           type: number
           name: page
@@ -4292,7 +4317,7 @@ disabilities.'
         type: string
       extension:
         description: 'The extension of the phone number.'
-        type: number
+        type: ['number', 'null']
       type:
         description: 'Whether the phone number relates to a fixed or cellular phone.'
         type: string
