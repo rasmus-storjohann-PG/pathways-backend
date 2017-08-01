@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors')
 
-// var index = require('./routes/index');
 var pathways = require('./api/controllers/pathways');
 
 var app = express();
