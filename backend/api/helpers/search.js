@@ -1,7 +1,7 @@
-var AirsTaxonomy = require('../models/airs_taxonomy');
-var Service = require('../models/service');
-var ServiceArea = require('../models/service_area');
-var ServiceTaxonomy = require('../models/service_taxonomy');
+var AirsTaxonomy = require('../../models/airs_taxonomy');
+var Service = require('../../models/service');
+var ServiceArea = require('../../models/service_area');
+var ServiceTaxonomy = require('../../models/service_taxonomy');
 
 module.exports = {
   getServicesMatchingKeywords: getServicesMatchingKeywords,

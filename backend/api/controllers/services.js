@@ -1,7 +1,7 @@
 'use strict';
 var Service = require('../../models/service');
-var listDocuments = require('../../services/search').listDocuments;
-var getDocument = require('../../services/search').getDocument;
+var listDocuments = require('../helpers/search').listDocuments;
+var getDocument = require('../helpers/search').getDocument;
 
 module.exports = {
   listServices: listServices,

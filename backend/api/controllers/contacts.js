@@ -1,6 +1,8 @@
 'use strict';
 var Contact = require('../../models/contact');
 var Phone = require('../../models/phone');
+var listDocuments = require('../helpers/search').listDocuments;
+var getDocument = require('../helpers/search').getDocument;
 
 module.exports = {
   listContacts: listContacts,

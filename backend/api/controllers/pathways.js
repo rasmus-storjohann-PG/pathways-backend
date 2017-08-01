@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var ServiceArea = require('../models/service_area');
-var getServicesMatchingKeywords = require('../services/search.js').getServicesMatchingKeywords
+
+var ServiceArea = require('../../models/service_area');
+var getServicesMatchingKeywords = require('../helpers/search.js').getServicesMatchingKeywords
 
 // TODO: Probably should move this elsewhere.
 router.get('/service_areas', function(req, res){

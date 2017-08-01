@@ -8,8 +8,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors')
 
-var index = require('./routes/index');
-var pathways = require('./routes/pathways');
+// var index = require('./routes/index');
+var pathways = require('./api/controllers/pathways');
 
 var app = express();
 var config = {
@@ -43,7 +43,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
-app.use('/', index);
 app.use('/pathways', pathways);
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
@@ -55,6 +54,6 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   var port = process.env.PORT || 3000;
   app.listen(port);
   console.log('Running on http://127.0.0.1:' + port);
-  
+
 });
 module.exports = app;
