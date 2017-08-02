@@ -13,11 +13,12 @@ module.exports = {
 }
 
 function listDocuments(req, res, model){
+  var query = FilteringHelper.parseQueryParameters(req.swagger.params.query.value);
   var page = req.swagger.params.page.value;
   var per_page = req.swagger.params.per_page.value;
   var skip = per_page * (page - 1)
 
-  model.find({}, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
+  model.find(query, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
   .then(function(docs){
       res.json(docs);
   });
