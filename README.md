@@ -13,3 +13,10 @@ Make sure you have the following Environment vars set:
 
 ### To start (recommended):
 `nodemon app.js`
+
+
+### Database Management
+
+`mongodump --uri <database uri> -o ~/data/bc211bk`
+
+`mongorestore -u peacegeeks -p <password> --host ds159112.mlab.com --port 59112 -d bc211 ~/data/bc211bk/bc211/`
