@@ -1,16 +1,13 @@
-import argparse
 import csv
+import os
 
-def process_args():
-    parser = argparse.ArgumentParser(description='Clean up the csv file containing the AIRS taxonomies from BC211.')
-    parser.add_argument('bc211_csv_taxonomies', help='the path to the csv file containing AIRS taxonomy records.')
-    args = parser.parse_args()
-    return args
-
+# TODO: Port this thing to Node!!!!
 
 if __name__ == "__main__":
-    file = "data/2015Mar-LATaxonomy-bc211Keywordcrosswalkguide-ACTIVE.csv"
-    output = "data/airs_taxonomy_CLEANED.csv"
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    file = os.path.join(dir_path, "airs_dump/2015Mar-LATaxonomy-bc211Keywordcrosswalkguide-ACTIVE.csv")
+    output = os.path.join(dir_path, "airs_dump/airs_taxonomy.csv")
 
     output_csv_lines = []
     headers = None
