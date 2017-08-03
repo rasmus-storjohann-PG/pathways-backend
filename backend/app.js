@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors')
-
+var getMongoDbUri = require('./db').getMongoDbUri;
 var pathways = require('./api/controllers/pathways');
 
 var app = express();
@@ -15,9 +15,9 @@ var config = {
   appRoot: __dirname // required config
 };
 
-var mongoUri = process.env.PATHWAYS_MONGO_URI
-if (!mongoUri){
-  console.error("Error!!!! Set PATHWAYS_MONGO_URI environment var!");
+var mongoUri = getMongoDbUri();
+console.log("Connecting to " + mongoUri + "...");
+if (!mongoUri) {
   process.exit();
 }
 mongoose.connect(mongoUri);
