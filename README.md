@@ -9,7 +9,12 @@ This is the front for the application, built with React.
 This is the backend for the application, built with Express.
 ### Environment setup
 Make sure you have the following Environment vars set:
-* `PATHWAYS_MONGO_URI`
+
+ * `PATHWAYS_MONGO_HOST`
+ * `PATHWAYS_MONGO_PORT`
+ * `PATHWAYS_MONGO_USER`
+ * `PATHWAYS_MONGO_PASS`
+ * `PATHWAYS_MONGO_DB`
 
 ### To start (recommended):
 `nodemon app.js`
