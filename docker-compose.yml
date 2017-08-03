@@ -7,7 +7,9 @@ services:
     volumes:
       - ./backend:/pathways-backend
     environment:
-      - PATHWAYS_MONGO_URI=mongodb://pathways-mongo:27017/bc211
+      - PATHWAYS_MONGO_HOST=localhost
+      - PATHWAYS_MONGO_PORT=28000
+      - PATHWAYS_MONGO_DB=bc211
     ports:
       - 3000:3000
       - 9000:9000
@@ -15,6 +17,7 @@ services:
       - pathways-mongo
     depends_on:
       - pathways-mongo
+    command: "swagger project start"
   pathways-mongo:
     container_name: "pathways-mongo"
     image: mongo:latest
@@ -25,13 +28,3 @@ services:
       - ./data/db:/data/db
     ports:
       - 28000:27017
-  pathways-mongo-seed:
-    build: ./backend
-    volumes:
-      - ./backend:/pathways-backend
-      - /Users/tukrre/Documents/peacegeeks/bc211/iCarolExport-BC211-HSDS-20170721_170621:/bc211_data
-    environment:
-      - PATHWAYS_MONGO_URI=mongodb://pathways-mongo:27017/bc211
-    links:
-      - pathways-mongo
-    command: "node seed.js /bc211_data; "
