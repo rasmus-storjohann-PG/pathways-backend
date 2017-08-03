@@ -1,4 +1,0 @@
-lxml
-simplejson
-pymongo
-demjson
