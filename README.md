@@ -17,7 +17,7 @@ Make sure you have the following Environment vars set:
  * `PATHWAYS_MONGO_DB`
 
 ### To start (recommended):
-`nodemon app.js`
+`swagger project start`
 
 ### Heroku Deployment
 Set environment variables with:
