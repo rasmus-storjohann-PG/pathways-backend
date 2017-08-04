@@ -1,4 +1,5 @@
 # Welcome to the Pathways Repo
+[![Build Status](https://travis-ci.org/pg-irc/pathways-backend.svg?branch=master)](https://travis-ci.org/pg-irc/pathways-backend)
 This is the backend for the Pathways application, built with Express.
 
 ### Environment setup
