@@ -19,6 +19,12 @@ Make sure you have the following Environment vars set:
 ### To start (recommended):
 `nodemon app.js`
 
+### Heroku Deployment
+Set environment variables with:
+`heroku config:set <ENV_NAME>=<value>`
+
+For example:
+`heroku config:set PATHWAYS_MONGO_DB=bc211`
 
 ### Database Management
 
