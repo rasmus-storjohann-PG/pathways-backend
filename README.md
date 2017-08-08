@@ -16,6 +16,16 @@ Make sure you have the following Environment vars set:
 `swagger project start`
 
 ### Heroku Deployment
+
+#### Set up Heroku
+Add the Heroku remote 
+`git remote add heroku https://git.heroku.com/pathways-backend.git`
+
+#### Upload New Changes
+Deploy changes to Heroku
+`git push heroku master`
+
+#### Add environment vars (only on new Heroku instances)
 Set environment variables with:
 `heroku config:set <ENV_NAME>=<value>`
 
