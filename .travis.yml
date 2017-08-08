@@ -1,11 +1,16 @@
 language: node_js
+node_js:
+  - "node"
 services:
   - mongodb
 env:
   - PATHWAYS_MONGO_HOST=localhost
   - PATHWAYS_MONGO_PORT=27017
   - PATHWAYS_MONGO_DB=bc211
-before_install:
-  - mkdir sample_data
-  - wget https://github.com/pg-irc/sample-data/archive/master.zip -P sample_data
-  - cd data; node seed_211.js ../sample_data/ testing
+install:
+  - npm install
+  - ls node_modules
+before_script:
+  - wget https://github.com/pg-irc/sample-data/archive/master.zip -O sample_data.zip; unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing
+script:
+  - npm test

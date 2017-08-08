@@ -101,7 +101,6 @@ function seedDatabaseFrom211(){
               })
               .on('data', function(data){
                 process.stdout.write(".");
-                console.log(Model.collection.collectionName)
                 // Clear the old collection.
                 var newDoc = new Model(data);
                 newDoc.save({validateBeforeSave: false}, function(err){
@@ -111,7 +110,10 @@ function seedDatabaseFrom211(){
                 });
               })
               .on('end', function(){
-                console.log('\nFinished ' + collection + ' records.');
+                Model.count({}, function(err, count){
+                  console.log('\nFinished importing '+ count + " docs to " + collection);
+                });
+
                 count++;
                 if (count == csvFiles.length){
                   mongoose.connection.close();
