@@ -1,16 +1,24 @@
 language: node_js
 node_js:
-  - "node"
+- node
 services:
-  - mongodb
+- mongodb
 env:
-  - PATHWAYS_MONGO_HOST=localhost
-  - PATHWAYS_MONGO_PORT=27017
-  - PATHWAYS_MONGO_DB=bc211
+- PATHWAYS_MONGO_HOST=localhost
+- PATHWAYS_MONGO_PORT=27017
+- PATHWAYS_MONGO_DB=bc211
 install:
-  - npm install
-  - ls node_modules
+- npm install
+- ls node_modules
 before_script:
-  - wget https://github.com/pg-irc/sample-data/archive/master.zip -O sample_data.zip; unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing
+- wget https://github.com/pg-irc/sample-data/archive/master.zip -O sample_data.zip;
+  unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: qRs4dOBReS11d3gePFCweX+PT8JhE7+fCxCaeHY+yWDIqdCvYfA45FVFoxt8L1J7QQ9ZdyIyUBFOwoWgVcN38lv3Jg4cTnHcuOs09Ob4CTl6NVu/PpEsZgy9SZCcTPkJaN/JSO7UXPNTAu5IqQ2gkjf2Jo/zkwzau4lZIBl9wa390YX2h115wOW5S7zALOiQ9GDH6dyL6kv98k8vYnX5oyjsksit4tOBQFOtZ7sq5ERLB1uEQEps+sQTqBJx6WuH+dEYRuDdnrj2JDsXH+LQUFKiYzLWDbSm+Jw0FVq6IT55JUK0uqu6ZV9Y1mKEHa0fRGs7tkANCjWyXIM/lKPFjYTAo2M+DN6hd0HTrSKSPtAW6JNpAK4GPfSI4nHwVAdhruezfODUfJs2EGszsu05m2L8kioV/jBcVskEluCKrA4yQpMNhkuuiwABtcA+cxLlimOP5Tds8ydXzzs1OCR1IFl4PzuT8sWikG0v/z8rbWD9436ckhEL5zjrV63XPqJwH5VMEOdn62mvV6a2fDzzHWAo6Ozaz59M2PDCOe6qgFUTfN91YDjkeTZWPkGjUfYAsrE4XHIeNYV6RxXAsb/xlGrTeHr1nA892FOs+s/zaHoii2ali8l2Dzi5oTL8f8SuXiNTMqFPeMgF/e7ccnSG3NsrP/0xgBegAjWpbMGxHyE=
+  app: pathways-backend
+  on:
+    repo: pg-irc/pathways-backend
