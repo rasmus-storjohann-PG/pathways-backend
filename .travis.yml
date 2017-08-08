@@ -9,10 +9,9 @@ env:
 - PATHWAYS_MONGO_DB=bc211
 install:
 - npm install
-- ls node_modules
 before_script:
 - wget https://github.com/pg-irc/sample-data/archive/master.zip -O sample_data.zip;
-  unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing
+  unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing; cd ..;
 script:
 - npm test
 deploy:
