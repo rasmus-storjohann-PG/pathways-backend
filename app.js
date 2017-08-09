@@ -42,6 +42,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
+// TODO : This is to not allow 304 responses, and we should remove this
+//        once the OpenReferral API supports 304.
+app.use(function(req, res, next) {
+  req.headers['if-none-match'] = 'no-match-for-this';
+  next();
+});
+
 app.use('/pathways', pathways);
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
