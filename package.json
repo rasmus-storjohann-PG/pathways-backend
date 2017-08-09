@@ -31,6 +31,6 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "swagger project test"
+    "test": "swagger project test | tee out.log && ! grep -q -E \"[0-9]+ failing\" out.log"
   }
 }
