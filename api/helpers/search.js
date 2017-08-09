@@ -27,7 +27,11 @@ function listDocuments(req, res, model){
 function getDocument(req, res, model, primaryKey){
   var primaryVal = req.swagger.params[primaryKey].value;
   model.findOne({id: primaryVal}, {_id: 0, __v: 0}).then(function(doc){
-    res.json(new Array(doc));
+    if (!doc){
+      res.json(new Array())
+    } else {
+      res.json(new Array(doc));
+    }
   });
 }
 
@@ -38,7 +42,11 @@ function getRelatedDocument(req, res, foreignModel, foreignKey, primaryKey){
   query['id'] = foreignVal;
   query[primaryKey] = primaryVal;
   foreignModel.findOne(query, {_id: 0, __v: 0}).then(function(doc){
-    res.json(new Array(doc));
+    if (!doc){
+      res.json(new Array())
+    } else {
+      res.json(new Array(doc));
+    }
   });
 }
 
@@ -47,7 +55,6 @@ function listRelatedDocuments(req, res, foreignModel, primaryKey){
   var query = {};
   query[primaryKey] = primaryVal;
   foreignModel.find(query, {_id: 0, __v: 0}).then(function(docs){
-    console.log(docs);
     res.json(docs);
   });
 }
