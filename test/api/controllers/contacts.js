@@ -28,13 +28,13 @@ describe('controllers', function() {
           .end(function(err, res) {
             should.not.exist(err);
             res.body.forEach(function(con){
-              con.name.should.be.equal(value);
+              con[field].should.be.equal(value);
             });
             done();
           });
       });
     });
-    describe('GET /contact/{contact_id}', function() {
+    describe('GET /contacts/{contact_id}', function() {
       it('should return a single contact', function(done) {
         request(server)
           .get('/contacts/' + 'e887dde4-ce76-4a44-8057-c43bf303a332')
@@ -61,7 +61,7 @@ describe('controllers', function() {
       });
     });
     describe('GET /contacts/{contact_id}/phones', function() {
-      it('should return a single contact', function(done) {
+      it('should return all contact phones', function(done) {
         request(server)
           .get('/contacts/' + '4a318a8e-b65e-4da3-800b-3d1e92407a95' + '/phones')
           .set('Accept', 'application/json')
@@ -75,7 +75,7 @@ describe('controllers', function() {
       });
     });
     describe('GET /contacts/{contact_id}/phones/{phone_id}', function() {
-      it('should return a single contact', function(done) {
+      it('should return a single phone', function(done) {
         request(server)
           .get('/contacts/' + '4a318a8e-b65e-4da3-800b-3d1e92407a95' + '/phones/' + 'e9c19752-c8d4-494f-b527-b65c9c86c8ce')
           .set('Accept', 'application/json')

@@ -28,7 +28,7 @@ describe('controllers', function() {
           .end(function(err, res) {
             should.not.exist(err);
             res.body.forEach(function(loc){
-              loc.name.should.be.equal(value);
+              loc[field].should.be.equal(value);
             });
             done();
           });
@@ -61,7 +61,7 @@ describe('controllers', function() {
       });
     });
     describe('GET /locations/{location_id}/phones', function() {
-      it('should return a single location', function(done) {
+      it('should return a all location phones', function(done) {
         request(server)
           .get('/locations/' + '30b84570-64a1-11e6-8b77-86f30ca893d3' + '/phones')
           .set('Accept', 'application/json')
@@ -75,7 +75,7 @@ describe('controllers', function() {
       });
     });
     describe('GET /locations/{location_id}/phones/{phone_id}', function() {
-      it('should return a single location', function(done) {
+      it('should return a single phone', function(done) {
         request(server)
           .get('/locations/' + '30b84570-64a1-11e6-8b77-86f30ca893d3' + '/phones/' + '3733e828-58e5-4ff5-9dc6-ae24f92a0f56')
           .set('Accept', 'application/json')
