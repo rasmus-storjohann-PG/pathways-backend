@@ -50,6 +50,12 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   // install middleware
   swaggerExpress.register(app);
 
+  // install response validation listener (this will only be called if there actually are any errors or warnings)
+  swaggerExpress.runner.on('responseValidationError', function(validationResponse, req, res) {
+    console.log(JSON.stringify(validationResponse.errors));
+    res.status(500).json(validationResponse.errors);
+  });
+
   var port = process.env.PORT || 3000;
   app.listen(port);
   console.log('Running on http://127.0.0.1:' + port);
