@@ -7,8 +7,8 @@ var RegularScheduleSchema = new Schema({
   location_id: String,
   service_at_location_id: String,
   weekday: { type: Number, required: true },
-  opens_at: Date, // TODO: Maybe?
-  closes_at: Date //TODO: Maybe?
+  opens_at: String, // TODO: Maybe?
+  closes_at: String //TODO: Maybe?
 }, { collection : 'regular_schedule' });
 
 module.exports = mongoose.model('RegularSchedule', RegularScheduleSchema );

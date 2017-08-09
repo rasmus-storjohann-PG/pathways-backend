@@ -10,7 +10,7 @@ var OrganizationSchema = new Schema({
   url: String,
   taxStatus: String,
   taxId: String,
-  year_incorporated: Date, // TODO: only year
+  year_incorporated: String, // TODO: only year
   legal_status: String
 }, { collection : 'organization' });
 
