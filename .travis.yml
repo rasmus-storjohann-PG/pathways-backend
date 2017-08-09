@@ -4,9 +4,7 @@ node_js:
 services:
 - mongodb
 env:
-- PATHWAYS_MONGO_HOST=localhost
-- PATHWAYS_MONGO_PORT=27017
-- PATHWAYS_MONGO_DB=bc211
+- PATHWAYS_MONGO_HOST=localhost PATHWAYS_MONGO_PORT=27017 PATHWAYS_MONGO_DB=bc211
 install:
 - npm install
 before_script:
