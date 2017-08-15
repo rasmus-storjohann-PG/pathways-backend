@@ -16,11 +16,11 @@ To implement the HSDS API, Swagger is used to generate the endpoints, using the 
 ---
 #### Environment setup
 Make sure you have the following Environment vars set:
- * `PATHWAYS_MONGO_HOST` - the host of the MongoDB storing Services records.
- * `PATHWAYS_MONGO_PORT` - the port of the MongoDB storing Services records.
- * `PATHWAYS_MONGO_USER` - the user with access tothe MongoDB storing Services records.
- * `PATHWAYS_MONGO_PASS`
- * `PATHWAYS_MONGO_DB` - the name of the DB storing Services records.
+ * `PATHWAYS_MONGO_HOST` - the host of the MongoDB storing Services records (ds159112.mlab.com)
+ * `PATHWAYS_MONGO_PORT` - the port of the MongoDB storing Services records. (59112)
+ * `PATHWAYS_MONGO_USER` - the user with access tothe MongoDB storing Services records. (peacegeeks)
+ * `PATHWAYS_MONGO_PASS` - (ask a developer)
+ * `PATHWAYS_MONGO_DB` - the name of the DB storing Services records. (bc211)
 
 ## Local Development
 ---
