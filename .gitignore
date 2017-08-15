@@ -9,3 +9,4 @@ pathways-py
 .idea/pathways.iml
 .idea/workspace.xml
 .idea/
+data/db/
