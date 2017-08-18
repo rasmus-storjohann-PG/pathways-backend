@@ -11,6 +11,56 @@ BC211 uses a custom taxonomy set. It is described like follows:
 
 Below is a bit of analysis on these terms and the services they categorize. 
 
+Here is the code used (MongoDB queries):
+```javascript
+var whos = [];
+var whats = [];
+var whys = [];
+
+var x = db.getCollection('bc211_taxonomy').find({}).forEach(function(t){
+    if (t.who){
+        whos.push(t.who)
+    }
+    if (t.what){
+        whats.push(t.what)
+    }
+    if (t.why){
+        whys.push(t.why)
+    }
+})
+
+whos = Array.unique(whos);
+whats = Array.unique(whats);
+whys = Array.unique(whys);
+
+var numberWhos = [];
+var z = whos.forEach(function(w){
+    var numWho = db.getCollection('bc211_taxonomy').find({who: w}).count();
+    numberWhos.push(numWho);
+});
+var numberWhats = [];
+var y = whats.forEach(function(w){
+    var numWhat = db.getCollection('bc211_taxonomy').find({what: w}).count();
+    numberWhats.push(numWhat);
+});
+var numberWhys = [];
+var x = whys.forEach(function(w){
+    var numWhy = db.getCollection('bc211_taxonomy').find({why: w}).count();
+    numberWhys.push(numWhy);
+});
+
+function zip(l1, l2){  
+    return l1.map(function (e, i) {
+        return [e, l2[i]];
+    });
+}
+
+x = zip(whys, numberWhys);
+y = zip(whats, numberWhats);
+z = zip(whos, numberWhos);
+```
+
+
 For each of the taxonomy types (WHO, WHAT, WHY), I have listed all the possible values for them as the first item, and the number of services that they tag as the second item. For example:
 ```json
 [
