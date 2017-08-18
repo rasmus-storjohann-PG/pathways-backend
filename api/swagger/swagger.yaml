@@ -2575,6 +2575,30 @@ paths:
           type: number
           name: per_page
           description: Amount of locations to return per page, up to 100.
+        - in: query
+          required: false
+          type: array
+          name: who
+          description: Using BC211 taxonomies, determine services that serve the 'who' specified.
+          collectionFormat: multi
+          items:
+            type: string
+        - in: query
+          required: false
+          type: array
+          name: what
+          description: Using BC211 taxonomies, determine services that serve the 'what' specified.
+          collectionFormat: multi
+          items:
+            type: string
+        - in: query
+          required: false
+          type: array
+          name: why
+          description: Using BC211 taxonomies, determine services that serve the 'what' specified.
+          collectionFormat: multi
+          items:
+            type: string
       responses:
         '200':
           description: Service Response

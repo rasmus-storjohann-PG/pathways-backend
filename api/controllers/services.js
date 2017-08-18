@@ -1,5 +1,8 @@
 'use strict';
+var util = require('util');
+
 var Service = require('../../models/service');
+var Bc211Taxonomy = require('../../models/bc211_taxonomy');
 var Contact = require('../../models/contact');
 var Eligibility = require('../../models/eligibility');
 // var Fee = require('../../models/fee');
@@ -13,10 +16,85 @@ var RequiredDocument = require('../../models/required_document');
 var ServiceArea = require('../../models/service_area');
 
 var SearchHelper = require('../helpers/search');
+var FilteringHelper = require('../helpers/filtering')
+
+function queryWhoWhatWhy(who, what, why, skip, per_page){
+  /**
+   * Creates a query on the WHO, WHAT, WHEN taxonomy system that BC211 uses.
+   * This query appends the who what why terms into a regular expression 
+   * that will do a logical OR on all the terms provided for a given category.
+   * 
+   * For example, if the query is: services?who=refugees&who=youth, 
+   * this will return all services applicable to refugees or youth.
+   */
+  var taxonomies = {};
+
+  var taxPattern = '(?i)(%s)'
+  if (who){
+    taxonomies['who'] = {};
+    taxonomies['who']['$regex'] = util.format(taxPattern, who.join('|'));
+  }       
+      
+  if (what){
+    taxonomies['what'] = {};
+    taxonomies['what']['$regex'] = util.format(taxPattern, what.join('|'));
+  }
+      
+  if (why){
+    taxonomies['why'] = {};
+    taxonomies['why']['$regex'] = util.format(taxPattern, why.join('|'));
+  }
+
+  return Service.aggregate([
+    {
+      $lookup: {
+        from: Bc211Taxonomy.collection.collectionName,
+        localField: 'id',
+        foreignField: 'service_id', 
+        as: 'bc211_taxonomies'
+      }
+    },
+    {
+      $match: {
+        'bc211_taxonomies': {
+            $elemMatch: taxonomies
+        }
+      }
+    },
+    {
+      $project: {
+        _id: 0, __v: 0, bc211_taxonomies: 0
+      }
+    },
+    {
+      $skip: skip
+    },
+    {
+      $limit: per_page
+    }
+  ])
+}
 
 module.exports = {
   listServices: function (req, res) {
-    SearchHelper.listDocuments(req, res, Service);
+    var query = FilteringHelper.parseQueryParameters(req.swagger.params.query.value);
+    var page = req.swagger.params.page.value;
+    var per_page = req.swagger.params.per_page.value;
+    var skip = per_page * (page - 1)
+    
+    var who = req.swagger.params.who.value;
+    var what = req.swagger.params.what.value;
+    var why = req.swagger.params.why.value;    
+
+    if (who || what || why){
+      var query = queryWhoWhatWhy(who, what, why, skip, per_page)
+
+    } else{
+      var query = Service.find(query, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
+    }
+    query.then(function(docs){
+      res.json(docs);
+    });
   },
   getService: function (req, res){
     SearchHelper.getDocument(req, res, Service, 'service_id');
