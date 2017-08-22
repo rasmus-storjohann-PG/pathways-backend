@@ -9,13 +9,14 @@ install:
 - npm install
 before_script:
 - wget https://github.com/pg-irc/sample-data/archive/master.zip -O sample_data.zip;
-  unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing; cd ..;
+  unzip sample_data.zip; cd data; node seed_211.js ../sample-data-master/simple testing;
+  cd ..;
 script:
 - npm test
 deploy:
   provider: heroku
   api_key:
-    secure: qRs4dOBReS11d3gePFCweX+PT8JhE7+fCxCaeHY+yWDIqdCvYfA45FVFoxt8L1J7QQ9ZdyIyUBFOwoWgVcN38lv3Jg4cTnHcuOs09Ob4CTl6NVu/PpEsZgy9SZCcTPkJaN/JSO7UXPNTAu5IqQ2gkjf2Jo/zkwzau4lZIBl9wa390YX2h115wOW5S7zALOiQ9GDH6dyL6kv98k8vYnX5oyjsksit4tOBQFOtZ7sq5ERLB1uEQEps+sQTqBJx6WuH+dEYRuDdnrj2JDsXH+LQUFKiYzLWDbSm+Jw0FVq6IT55JUK0uqu6ZV9Y1mKEHa0fRGs7tkANCjWyXIM/lKPFjYTAo2M+DN6hd0HTrSKSPtAW6JNpAK4GPfSI4nHwVAdhruezfODUfJs2EGszsu05m2L8kioV/jBcVskEluCKrA4yQpMNhkuuiwABtcA+cxLlimOP5Tds8ydXzzs1OCR1IFl4PzuT8sWikG0v/z8rbWD9436ckhEL5zjrV63XPqJwH5VMEOdn62mvV6a2fDzzHWAo6Ozaz59M2PDCOe6qgFUTfN91YDjkeTZWPkGjUfYAsrE4XHIeNYV6RxXAsb/xlGrTeHr1nA892FOs+s/zaHoii2ali8l2Dzi5oTL8f8SuXiNTMqFPeMgF/e7ccnSG3NsrP/0xgBegAjWpbMGxHyE=
+    secure: RrWhbXx89T4tshuHG2Epp2a4KUP5sRgoRoATCl0rUl+Q+8TW4yLAfHXxCZS28by2NLRCAQt2DUT5RUK9Pr7nDwe4RXLsTBk857Y/xSuGefMSuopZnWxx0ALf+gAlqNwnT6icVvdqBmzRi0lg+PI2PB06io5ELxLX1lT9U9q/XB7afuV3V6CJ3wqIfKH13H1CxorzFiCz3bYCRlY111HbKnhL6NMorVUadXuVeTEj1rbWkgIsGX1jXrou/uZgwLL+z8OGMk08a1Aga1e3+gfpkiJkael2SAHezWkGJslZiS0marRle2j/c4jZh/56qHHJQeDLwSnWQi/Dqc6oqWFwaOdNjWOtjO8WNKSYpU40mtb89rLLGuxSfZRd7H3CW65S/sZ7/+tv/6+7VM3zaNlQapRAoI88QYpjAjmTEHYI1lgTFTSlYlHPl5C7MuKOQM7jGGBceEBLBJmQHKnTQ6ZP/Jynowa6iA7JfDI6+Grf7lB3Uj13T5XbsNzxh820ubPC5tJ9LXlf21n75UfbhWHl72IbP5FSH4bjcVzFSl47pPgDXT9yzAHJxTQsd1L96Y+uLl0oMQivuCdl7T9BjsMRoZp4ROv4thyL3lrXG+IYeBbWFFCybED7bIp9gevSDlbBvXxhTlIb26H2ceSKv17n5JDhhUdN3uiXmf7v1KANPhE=
   app: pathways-backend
   on:
     repo: pg-irc/pathways-backend
