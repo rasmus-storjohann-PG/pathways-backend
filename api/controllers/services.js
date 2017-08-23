@@ -18,7 +18,7 @@ var ServiceArea = require('../../models/service_area');
 var SearchHelper = require('../helpers/search');
 var FilteringHelper = require('../helpers/filtering')
 
-function queryWhoWhatWhy(who, what, why, keywords, skip, per_page){
+function queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page){
   /**
    * Creates a query on the WHO, WHAT, WHEN taxonomy system that BC211 uses.
    * This query appends the who what why terms into a regular expression 
@@ -27,47 +27,54 @@ function queryWhoWhatWhy(who, what, why, keywords, skip, per_page){
    * For example, if the query is: services?who=refugees&who=youth, 
    * this will return all services applicable to refugees or youth.
    */
-  
-  var taxonomies = {};
-
-  var taxPattern = '(?i)(%s)'
-  if (who){
-    taxonomies['who'] = {};
-    taxonomies['who']['$regex'] = util.format(taxPattern, who.join('|'));
-  }       
-      
-  if (what){
-    taxonomies['what'] = {};
-    taxonomies['what']['$regex'] = util.format(taxPattern, what.join('|'));
-  }
-      
-  if (why){
-    taxonomies['why'] = {};
-    taxonomies['why']['$regex'] = util.format(taxPattern, why.join('|'));
-  }
 
   var query = [
-    {
-      $lookup: {
-        from: Bc211Taxonomy.collection.collectionName,
-        localField: 'id',
-        foreignField: 'service_id', 
-        as: 'bc211_taxonomies'
-      }
-    },
-    {
-      $match: {
-        'bc211_taxonomies': {
-            $elemMatch: taxonomies
-        }
-      }
-    },
     {
       $project: {
         _id: 0, __v: 0, bc211_taxonomies: 0
       }
     }
   ]
+
+  var taxonomies = {};
+  var taxPattern = '(?i)(%s)';
+  var performWhoWhatWhy = false;
+  if (who){
+    taxonomies['who'] = {};
+    taxonomies['who']['$regex'] = util.format(taxPattern, who.join('|'));
+    performWhoWhatWhy = true;
+  }       
+      
+  if (what){
+    taxonomies['what'] = {};
+    taxonomies['what']['$regex'] = util.format(taxPattern, what.join('|'));
+    performWhoWhatWhy = true;
+  }
+      
+  if (why){
+    taxonomies['why'] = {};
+    taxonomies['why']['$regex'] = util.format(taxPattern, why.join('|'));
+    performWhoWhatWhy = true;
+  }
+
+  if (performWhoWhatWhy){
+    var lookupQ = {
+      $lookup: {
+        from: Bc211Taxonomy.collection.collectionName,
+        localField: 'id',
+        foreignField: 'service_id', 
+        as: 'bc211_taxonomies'
+      }
+    }
+    var matchQ = {
+      $match: {
+        'bc211_taxonomies': {
+            $elemMatch: taxonomies
+        }
+      }
+    }
+    query.unshift(lookupQ, matchQ);
+  }
 
   if (keywords){
     var match = { $match: { $text: { $search: keywords } } }
@@ -98,12 +105,7 @@ module.exports = {
     var why = req.swagger.params.why.value;  
     var keywords = req.swagger.params.keywords.value;  
 
-    if (who || what || why){
-      var query = queryWhoWhatWhy(who, what, why, keywords, skip, per_page)
-    } else{
-      var query = Service.find(query, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
-    }
-    query.then(function(docs){
+    queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page).then(function(docs){
       res.json(docs);
     });
   },
