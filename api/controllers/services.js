@@ -76,7 +76,8 @@ function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page
         }
       }
     }
-    aggregationPipeline.unshift(matchQ);
+    //Insert it after the lookup, but before everything else.
+    aggregationPipeline.splice(1, 0, matchQ);
   }
 
   if (keywords){
@@ -92,6 +93,8 @@ function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page
   if (per_page && per_page >= 0){
     aggregationPipeline.push({$limit: per_page});
   }
+
+  console.log(aggregationPipeline);
 
   return Service.aggregate(aggregationPipeline)
 }
