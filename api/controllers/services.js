@@ -31,7 +31,7 @@ function queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page){
   var query = [
     {
       $project: {
-        _id: 0, __v: 0, bc211_taxonomies: 0
+        _id: 0, __v: 0
       }
     }
   ]
