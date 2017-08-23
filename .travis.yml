@@ -20,3 +20,5 @@ deploy:
   app: pathways-backend
   on:
     repo: pg-irc/pathways-backend
+notifications:
+  slack: peacegeeks:5vsKNY6nV4sqnQ71uoSkPlxD
