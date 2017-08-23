@@ -83,8 +83,7 @@ function seedDatabaseFrom211(){
     });
 
     var connection = mongoose.connect(mongoUri, {useMongoClient: true});
-    var count = 0;
-    csvFiles.forEach(file => {
+    csvFiles.forEach(function(file, idx) {
       var collection = openReferralFilePattern.exec(file)[regexCollectionIdx];
       var csvFile = path.join(pathTo211, file);
       var model = modelMapping[collection];
@@ -114,8 +113,9 @@ function seedDatabaseFrom211(){
                   console.log('\nFinished importing '+ count + " docs to " + collection);
                 });
 
-                count++;
-                if (count == csvFiles.length){
+                console.log(idx + " files processed.");
+                if (idx == csvFiles.length - 1){
+                  console.log("Closing connection");
                   mongoose.connection.close();
                 }
               });

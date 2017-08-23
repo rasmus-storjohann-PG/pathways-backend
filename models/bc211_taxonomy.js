@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Bc211TaxonomySchema = new Schema({
-    service_id: String,
+    service_id: { type: String, index: true },
     who: String,
     what: String,
     why: String
