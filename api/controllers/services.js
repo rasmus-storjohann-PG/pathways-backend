@@ -18,7 +18,7 @@ var ServiceArea = require('../../models/service_area');
 var SearchHelper = require('../helpers/search');
 var FilteringHelper = require('../helpers/filtering')
 
-function queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page){
+function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page){
   /**
    * Creates a query on the WHO, WHAT, WHEN taxonomy system that BC211 uses.
    * This query appends the who what why terms into a regular expression 
@@ -28,7 +28,10 @@ function queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page){
    * this will return all services applicable to refugees or youth.
    */
 
-  var query = [
+  var aggregationPipeline = [
+    {
+      $match: query,
+    },
     {
       $project: {
         _id: 0, __v: 0
@@ -73,24 +76,24 @@ function queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page){
         }
       }
     }
-    query.unshift(lookupQ, matchQ);
+    aggregationPipeline.unshift(lookupQ, matchQ);
   }
 
   if (keywords){
     var match = { $match: { $text: { $search: keywords } } }
     var sort = { $sort: { score: { $meta: "textScore" } } }
-    query.unshift(match, sort);
+    aggregationPipeline.unshift(match, sort);
   }
 
   if (skip && skip > 0){
-    query.push({$skip: skip});
+    aggregationPipeline.push({$skip: skip});
   }
 
   if (per_page && per_page >= 0){
-    query.push({$limit: per_page});
+    aggregationPipeline.push({$limit: per_page});
   }
 
-  return Service.aggregate(query)
+  return Service.aggregate(aggregationPipeline)
 }
 
 module.exports = {
@@ -105,7 +108,7 @@ module.exports = {
     var why = req.swagger.params.why.value;  
     var keywords = req.swagger.params.keywords.value;  
 
-    queryWhoWhatWhyKeywords(who, what, why, keywords, skip, per_page).then(function(docs){
+    queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page).then(function(docs){
       res.json(docs);
     });
   },

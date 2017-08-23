@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors')
 var getMongoDbUri = require('./db').getMongoDbUri;
-var pathways = require('./api/controllers/pathways');
 
 var app = express();
 var config = {
@@ -48,8 +47,6 @@ app.use(function(req, res, next) {
   req.headers['if-none-match'] = 'no-match-for-this';
   next();
 });
-
-app.use('/pathways', pathways);
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
