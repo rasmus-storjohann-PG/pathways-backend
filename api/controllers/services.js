@@ -30,6 +30,14 @@ function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page
 
   var aggregationPipeline = [
     {
+      $lookup: {
+        from: Bc211Taxonomy.collection.collectionName,
+        localField: 'id',
+        foreignField: 'service_id', 
+        as: 'bc211_taxonomies'
+      }
+    },
+    {
       $match: query,
     },
     {
@@ -61,14 +69,6 @@ function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page
   }
 
   if (performWhoWhatWhy){
-    var lookupQ = {
-      $lookup: {
-        from: Bc211Taxonomy.collection.collectionName,
-        localField: 'id',
-        foreignField: 'service_id', 
-        as: 'bc211_taxonomies'
-      }
-    }
     var matchQ = {
       $match: {
         'bc211_taxonomies': {
@@ -76,7 +76,7 @@ function queryWhoWhatWhyKeywords(query, who, what, why, keywords, skip, per_page
         }
       }
     }
-    aggregationPipeline.unshift(lookupQ, matchQ);
+    aggregationPipeline.unshift(matchQ);
   }
 
   if (keywords){
