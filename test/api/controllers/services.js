@@ -4,36 +4,36 @@ var server = require('../../../app');
 
 describe('controllers', function() {
   describe('services', function() {
-    describe('GET /services', function() {
-      it('should return all services', function(done) {
-        request(server)
-          .get('/services')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end(function(err, res) {
-            should.not.exist(err);
-            res.body.should.be.instanceof(Array);
-            done();
-          });
-      });
-      it('should return services matching query', function(done) {
-        var field = 'name';
-        var value = 'Never Homeless Helpline';
-        request(server)
-          .get('/services?query=' + field + '==' + value)
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end(function(err, res) {
-            should.not.exist(err);
-            res.body.forEach(function(org){
-              org[field].should.be.equal(value);
-            });
-            done();
-          });
-      });
-    });
+    // describe('GET /services', function() {
+    //   it('should return all services', function(done) {
+    //     request(server)
+    //       .get('/services')
+    //       .set('Accept', 'application/json')
+    //       .expect('Content-Type', /json/)
+    //       .expect(200)
+    //       .end(function(err, res) {
+    //         should.not.exist(err);
+    //         res.body.should.be.instanceof(Array);
+    //         done();
+    //       });
+    //   });
+    //   it('should return services matching query', function(done) {
+    //     var field = 'name';
+    //     var value = 'Never Homeless Helpline';
+    //     request(server)
+    //       .get('/services?query=' + field + '==' + value)
+    //       .set('Accept', 'application/json')
+    //       .expect('Content-Type', /json/)
+    //       .expect(200)
+    //       .end(function(err, res) {
+    //         should.not.exist(err);
+    //         res.body.forEach(function(org){
+    //           org[field].should.be.equal(value);
+    //         });
+    //         done();
+    //       });
+    //   });
+    // });
     describe('GET /services/{service_id}', function() {
       it('should return a single service', function(done) {
         request(server)
