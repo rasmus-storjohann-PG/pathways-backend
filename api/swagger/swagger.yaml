@@ -2599,6 +2599,11 @@ paths:
           collectionFormat: multi
           items:
             type: string
+        - in: query
+          required: false
+          type: string
+          name: keywords
+          description: Optional keywords to provide in a search. These will be used against a text index to rank searches by relevance.
       responses:
         '200':
           description: Service Response

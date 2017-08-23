@@ -18,7 +18,7 @@ var ServiceArea = require('../../models/service_area');
 var SearchHelper = require('../helpers/search');
 var FilteringHelper = require('../helpers/filtering')
 
-function queryWhoWhatWhy(who, what, why, skip, per_page){
+function queryWhoWhatWhy(who, what, why, keywords, skip, per_page){
   /**
    * Creates a query on the WHO, WHAT, WHEN taxonomy system that BC211 uses.
    * This query appends the who what why terms into a regular expression 
@@ -27,6 +27,7 @@ function queryWhoWhatWhy(who, what, why, skip, per_page){
    * For example, if the query is: services?who=refugees&who=youth, 
    * this will return all services applicable to refugees or youth.
    */
+  
   var taxonomies = {};
 
   var taxPattern = '(?i)(%s)'
@@ -45,7 +46,7 @@ function queryWhoWhatWhy(who, what, why, skip, per_page){
     taxonomies['why']['$regex'] = util.format(taxPattern, why.join('|'));
   }
 
-  return Service.aggregate([
+  var query = [
     {
       $lookup: {
         from: Bc211Taxonomy.collection.collectionName,
@@ -65,14 +66,24 @@ function queryWhoWhatWhy(who, what, why, skip, per_page){
       $project: {
         _id: 0, __v: 0, bc211_taxonomies: 0
       }
-    },
-    {
-      $skip: skip
-    },
-    {
-      $limit: per_page
     }
-  ])
+  ]
+
+  if (keywords){
+    var match = { $match: { $text: { $search: keywords } } }
+    var sort = { $sort: { score: { $meta: "textScore" } } }
+    query.unshift(match, sort);
+  }
+
+  if (skip && skip > 0){
+    query.push({$skip: skip});
+  }
+
+  if (per_page && per_page >= 0){
+    query.push({$limit: per_page});
+  }
+
+  return Service.aggregate(query)
 }
 
 module.exports = {
@@ -84,11 +95,11 @@ module.exports = {
     
     var who = req.swagger.params.who.value;
     var what = req.swagger.params.what.value;
-    var why = req.swagger.params.why.value;    
+    var why = req.swagger.params.why.value;  
+    var keywords = req.swagger.params.keywords.value;  
 
     if (who || what || why){
-      var query = queryWhoWhatWhy(who, what, why, skip, per_page)
-
+      var query = queryWhoWhatWhy(who, what, why, keywords, skip, per_page)
     } else{
       var query = Service.find(query, {_id: 0, __v: 0}).skip(skip).limit(per_page) // pagination
     }

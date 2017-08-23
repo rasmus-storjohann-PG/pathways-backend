@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ServiceSchema = new Schema({
-  id:  { type: String, required: true },
+  id:  { type: String, required: true, index: true},
   organization_id: { type: String, required: true},
   program_id: String,
   name: { type: String, required: true },
@@ -18,5 +18,8 @@ var ServiceSchema = new Schema({
   licenses: String,
   taxonomy_ids: String
 }, {collection: 'service', validateBeforeSave:false});
+
+// We have a text index on description for key word searches.
+ServiceSchema.index({name: 'text', description: 'text'}, {name: "textIndex"});
 
 module.exports = mongoose.model('Service', ServiceSchema );
