@@ -24,8 +24,13 @@ Make sure you have the following Environment vars set:
 
 ## Local Development
 ---
-#### To start:
+### To get setup:
+`npm install`
+### To start
 `swagger project start`
+### Docker
+You can also run the entire backend stack through Docker if you prefer. There is a docker compose file that brings up the backend and the MongoDB in a single stack with:
+`docker-compose up`
 
 ## Heroku Deployment
 ---
