@@ -4,7 +4,7 @@
 ---
 #### Description
 This is the backend API for the Pathways application, built with Express. 
-It contains the API for retrieving human services data, and will be used in the Pathways frontend.
+It contains the API for retrieving human services data, and will be used in the [Pathways frontend](https://github.com/pg-irc/pathways-frontend).
 
 #### Technologies
 This project uses [ExpressJS](https://expressjs.com/) as the web framework for creating the API endpoints. It also attempts to adhere to the [OpenReferral](https://openreferral.org/) standards. This means two things:
