@@ -55,9 +55,25 @@ For example:
 
 ## Database Management
 ---
-#### Seeding Data
- *TODO: Fill this part in!*
-#### Migrating Data
-`mongodump --uri <database uri> -o ~/data/bc211bk`
+### Seeding Data
+Run the script:
+```javascript
+node data/seed_database.js PATH_TO_211_OPEN_REFERRAL MODE PATH_TO_211_XML
+```
+#### Background
+The backend is built to work on Human Services data stored in the BC211 datasets. BC211 uses [iCarol](http://icarol.com/) as their storage solution, so the data we seed the database is exported from here. It is intended that we will receive periodic data dumps from BC211, and sync to these, so that we do not have to maintain the integrity of the data ourselves. 
 
+In order to get started on a new deployment (local or otherwise), you must seed the database with the BC211 dataset.
+
+#### BC211 Services and Other Data
+The first thing you must seed is the BC211 data. This application supports importing this data in an OpenReferral format. iCarol supports exporting the data like this, so one must request the data from them. Contact a team member to get a data set.
+
+#### BC211 Custom Taxonomies
+BC211 uses their own custom taxonomy set to categorize their data for maximum utility. Unfortunately, OpenReferral exporting does not export these additional taxonomy terms, so we must seed them manually, by parsing the XML-formatted version of the data.
+
+### Migrating Data
+You can use the standard MongoDB migration tools to perform database migrations.
+#### Dumping Database
+`mongodump --uri <database uri> -o ~/data/bc211bk`
+#### Restoring Database
 `mongorestore -u peacegeeks -p <password> --host ds159112.mlab.com --port 59112 -d bc211 ~/data/bc211bk/bc211/`
