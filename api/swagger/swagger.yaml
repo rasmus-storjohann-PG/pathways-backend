@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: "Services Advisor Pathways API"
-  description: "This is the backend API used for the Service Advisor Pathways application. It contains the full implmentation of the OpenReferral API, as described here: https://openreferral.org/. This OpenAPI file is from here: https://openreferral.github.io/api-specification/definition/"
+  description: "This is the backend API used for the Service Advisor Pathways application. It contains the full implmentation of the OpenReferral API, as described here: https://openreferral.org/. This OpenAPI file is from here: https://openreferral.github.io/api-specification/definition/."
   contact:
     name: PeaceGeeks
     url: https://peacegeeks.org/
@@ -10,7 +10,6 @@ info:
     name: Berkeley Software Distribution (BSD) 3-clause
     url: https://opensource.org/licenses/BSD-3-Clause
   version: v1.0
-host: localhost:3000
 basePath: /
 schemes:
 - http
