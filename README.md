@@ -1,5 +1,8 @@
 # Pathways Backend API
 [![Build Status](https://travis-ci.org/pg-irc/pathways-backend.svg?branch=master)](https://travis-ci.org/pg-irc/pathways-backend)
+
+[Live API](http://pathways-backend.herokuapp.com/api-docs/)
+
 ## Background
 ---
 #### Description
