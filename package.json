@@ -25,8 +25,10 @@
     "serve-favicon": "~2.4.2",
     "swagger": "^0.7.5",
     "swagger-express-mw": "^0.7.0",
+    "swagger-ui-express": "^2.0.6",
     "uuid": "^3.1.0",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "should": "^7.1.0",

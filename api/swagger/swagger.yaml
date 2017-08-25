@@ -4160,8 +4160,7 @@ definitions:
         description: 'The identifier of the location for which the entry describes the accessibility provision.'
         type: string
       accessibility:
-        description: 'Description of assistance or infrastructure that facilitate access to clients with
-disabilities.'
+        description: 'Description of assistance or infrastructure that facilitate access to clients with disabilities.'
         type: string
       details:
         description: 'Any further details relating to the relevant accessibility arrangements at this location. E.g. whether advance notice is required to use an accessibility facility.'

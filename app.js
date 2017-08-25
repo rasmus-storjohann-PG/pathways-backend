@@ -1,5 +1,7 @@
 var express = require('express');
 var SwaggerExpress = require('swagger-express-mw');
+var swaggerUi = require('swagger-ui-express');
+var YAML = require('yamljs');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -36,6 +38,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
+
+// install the swagger ui middleware, for ease of use.
+var swaggerDocYaml = YAML.load('./api/swagger/swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocYaml));
 
 // TODO : This is to not allow 304 responses, and we should remove this
 //        once the OpenReferral API supports 304.
