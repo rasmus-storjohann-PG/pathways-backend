@@ -1,3 +1,8 @@
+/*
+Script to seed the custom BC211 Taxonomies to the database.
+Requires the XML export from iCarol of BC211 data.
+*/
+
 var mongoose = require('mongoose'),
     getMongoDbUri = require('../db').getMongoDbUri,
     fs = require('fs'),
@@ -76,5 +81,12 @@ function store211Taxonomies(pathTo211Xml){
         console.log('Done');
     });
 }
-var pathTo211Xml = process.argv[2];
-store211Taxonomies(pathTo211Xml);
+
+module.exports = {
+    store211Taxonomies: store211Taxonomies
+};
+
+if (require.main === module) {
+    var pathTo211Xml = process.argv[2];
+    store211Taxonomies(pathTo211Xml);
+}

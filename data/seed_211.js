@@ -1,3 +1,8 @@
+/*
+Script to seed the entire BC211 dataset (minus custom taxonomies) to the database..
+Requires the OpenReferral export from iCarol of BC211 data.
+*/
+
 var fs = require('fs');
 const path = require('path');
 var csv = require('fast-csv');
@@ -15,17 +20,6 @@ var modes = {
     regexCollectionIdx: 1
   }
 }
-
-var pathTo211 = process.argv[2];
-var mode = process.argv[3];
-
-if (!modes[mode]){
-  console.log("ERROR: Invalid mode, use one of [icarol, testing]");
-  process.exit(-1);
-}
-
-var openReferralFilePattern = modes[mode].openReferralFilePattern;
-var regexCollectionIdx = modes[mode].regexCollectionIdx;
 
 var modelMapping = {
   accessibility_for_disabilities: require('../models/accessibility_for_disabilities'),
@@ -75,7 +69,15 @@ function onError(err){
   }
 }
 
-function seedDatabaseFrom211(){
+function seedDatabaseFrom211(pathTo211, mode){
+  if (!modes[mode]){
+    console.log("ERROR: Invalid mode, use one of [icarol, testing]");
+    process.exit(-1);
+  }
+
+  var openReferralFilePattern = modes[mode].openReferralFilePattern;
+  var regexCollectionIdx = modes[mode].regexCollectionIdx;
+
   fs.readdir(pathTo211, (err, files) => {
     // Filter out other files.
     var csvFiles = files.filter(function(filePath){
@@ -129,4 +131,15 @@ function seedDatabaseFrom211(){
   })
 }
 
-seedDatabaseFrom211();
+module.exports = {
+  seedDatabaseFrom211: seedDatabaseFrom211
+};
+
+
+if (require.main === module) {
+  // Parse arguments
+  var pathTo211 = process.argv[2];
+  var mode = process.argv[3];
+
+  seedDatabaseFrom211(pathTo211, mode);
+}
