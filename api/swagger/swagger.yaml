@@ -1,16 +1,15 @@
 swagger: '2.0'
 info:
-  title: "Open Referral API"
-  description: "This is a specification describing the Open Referral API, using the Human Services Specification. This has been extracted from the Ohana API deployment, but will be standardized to refer to the universal standard that will apply to any Open Referral compliant API."
-  termsOfService: "https://openreferral.org/documentation/"
+  title: "Services Advisor Pathways API"
+  description: "This is the backend API used for the Service Advisor Pathways application. It contains the full implmentation of the OpenReferral API, as described here: https://openreferral.org/. This OpenAPI file is from here: https://openreferral.github.io/api-specification/definition/"
   contact:
-    name: Open Referral
-    url: https://openreferral.org/
-    email: info@openreferral.org
+    name: PeaceGeeks
+    url: https://peacegeeks.org/
+    email: dev@peacegeeks.org
   license:
-    name: Open Data Commons Public Domain
-    url: http://opendatacommons.org/licenses/pddl/
-  version: v1.1
+    name: Berkeley Software Distribution (BSD) 3-clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  version: v1.0
 host: localhost:3000
 basePath: /
 schemes:
