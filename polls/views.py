@@ -1,4 +1,5 @@
-from django.http import  HttpResponseRedirect
+import logging
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
@@ -7,6 +8,8 @@ from rest_framework.response import Response
 from polls import business_logic
 from polls import repositories
 from polls import models
+
+LOGGER = logging.getLogger(__name__)
 
 # pylint: disable=too-many-ancestors
 class IndexView(generic.ListView):
@@ -32,6 +35,7 @@ class ResultsView(generic.DetailView):
 
 def vote_from_form(request, question_id):
     choice_id = request.POST['choice']
+    LOGGER.info("Handling vote call on question id %s and choice id %s", question_id, choice_id)
     controller = business_logic.VoteController(repositories.ChoiceRepository())
     controller.increment_vote_count_on_choice(question_id, choice_id)
     return HttpResponseRedirect(reverse('polls:results', args=(question_id)))
