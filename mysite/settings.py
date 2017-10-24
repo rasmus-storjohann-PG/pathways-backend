@@ -41,6 +41,35 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mysite.urls'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose-format': {
+            'format': '%(levelname)s %(module)s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'verbose-console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose-format'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'polls': {
+            'handlers': ['verbose-console'],
+            'level': 'DEBUG',
+        }
+    },
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

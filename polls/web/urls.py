@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from polls import views
+from polls.web import views
 
 # pylint: disable=invalid-name
 app_name = 'polls'
