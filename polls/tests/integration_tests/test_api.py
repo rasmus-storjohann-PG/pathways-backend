@@ -44,9 +44,9 @@ class ChoiceEntityTests(rest_test.APITestCase):
     def setUp(self):
         self.parent_post_response = create_question_entity(self.client)
         self.post_response = create_choice_entity(self.client, self.parent_post_response)
-        parent_key = self.parent_post_response.json()['pk']
-        child_key = self.post_response.json()['pk']
-        self.url = '/v1/questions/{0}/choices/{1}/'.format(parent_key, child_key)
+        self.parent_key = self.parent_post_response.json()['pk']
+        self.child_key = self.post_response.json()['pk']
+        self.url = '/v1/questions/{0}/choices/{1}/'.format(self.parent_key, self.child_key)
 
     def test_can_create_entity(self):
         self.assertEqual(self.post_response.status_code, 201)
@@ -68,6 +68,18 @@ class ChoiceEntityTests(rest_test.APITestCase):
         self.assertEqual(delete_response.status_code, 204)
         get_response = self.client.get(self.url)
         self.assertEqual(get_response.status_code, 404)
+
+    def test_can_vote_on_choice(self):
+        get_response = self.client.get(self.url)
+        self.assertEqual(get_response.json()['votes'], 3)
+        vote_url = '/v1/questions/{0}/choices/{1}/vote'.format(self.parent_key, self.child_key)
+        post_response = self.client.post(vote_url)
+        # TODO not sure if 301 is the right response here, watch for missing /
+        self.assertEqual(post_response.status_code, 301)
+        #self.assertEqual(post_response.json()['votes'], 4)
+        get_response = self.client.get(self.url)
+        self.assertEqual(get_response.json()['votes'], 4)
+
 
 class QuestionChoiceEntityTests(rest_test.APITestCase):
     def setUp(self):

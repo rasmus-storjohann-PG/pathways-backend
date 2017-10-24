@@ -9,6 +9,7 @@ class VoteController:
         choice = self.repository.get_choice_by_question_id_and_choice_id(question_id, choice_id)
         choice.votes += 1
         self.repository.save_choice(choice)
+        return choice
 
 def was_published_recently(question):
     now = timezone.now()
