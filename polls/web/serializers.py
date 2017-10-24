@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from polls import models
+from polls.storage import models
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     # choices = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='choice-view-set')

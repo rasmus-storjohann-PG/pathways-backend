@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from polls import models
-from polls import serializers
+from polls.storage import models
+from polls.web import serializers
 
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = models.Question.objects.all()

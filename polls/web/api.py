@@ -1,6 +1,6 @@
 from rest_framework import routers
 from django.conf.urls import url, include
-from polls import viewsets, views
+from polls.web import viewsets, views
 
 def build_urls_from_view_sets():
     router = routers.DefaultRouter()

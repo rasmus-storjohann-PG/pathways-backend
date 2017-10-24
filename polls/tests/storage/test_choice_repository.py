@@ -1,10 +1,12 @@
+import logging
 from django.test import TestCase
-from polls import models
-from polls import repositories
+from polls.storage import models, repositories
 from polls.tests import helpers
 
 class TestChoiceRepository(TestCase):
     def setUp(self):
+        logging.disable(logging.CRITICAL) 
+
         self.votes = 34
         self.choice_text = "bar"
         self.question = helpers.create_question(question_text="foo", days=-30)

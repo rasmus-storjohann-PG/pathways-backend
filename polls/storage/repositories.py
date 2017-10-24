@@ -1,5 +1,5 @@
 import logging
-from polls import models
+from polls.storage import models
 
 LOGGER = logging.getLogger(__name__)
 

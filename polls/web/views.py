@@ -6,8 +6,7 @@ from django.views import generic
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from polls import business_logic
-from polls import repositories
-from polls import models
+from polls.storage import models, repositories
 
 LOGGER = logging.getLogger(__name__)
 
