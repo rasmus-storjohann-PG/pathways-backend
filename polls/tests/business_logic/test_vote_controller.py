@@ -1,3 +1,4 @@
+import logging
 from unittest.mock import Mock
 from unittest.mock import MagicMock
 from django.http import Http404
@@ -6,6 +7,8 @@ from polls import business_logic
 
 class TestVoteController(TestCase):
     def setUp(self):
+        logging.disable(logging.CRITICAL)
+
         self.question_id = 23
         self.choice_id = "foo"
         self.initial_vote_count = 3
