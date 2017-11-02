@@ -24,3 +24,6 @@ class TestServiceProviderModel(TestCase):
 
     def test_has_longitude(self):
         self.assertEqual(self.provider_from_db.longitude, self.longitude)
+
+    def test_has_description(self):
+        self.assertEqual(self.provider_from_db.description, None)
