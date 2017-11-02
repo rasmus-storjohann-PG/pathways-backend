@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'behave_django',
+    'parler',
 ]
 
 MIDDLEWARE = [
@@ -87,8 +88,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
+PARLER_DEFAULT_LANGUAGE_CODE = 'en'
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'en',},
+        {'code': 'fr',},
+        {'code': 'nl',},
+    ),
+    'default': {
+        'fallbacks': ['en'],          # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks too.
+    }
+}
 
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

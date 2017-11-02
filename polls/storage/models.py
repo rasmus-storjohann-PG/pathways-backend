@@ -1,8 +1,14 @@
 from django.db import models
+from parler.models import TranslatableModel, TranslatedFields
+from django.utils.translation import ugettext_lazy as _
 
-class Question(models.Model):
+class Question(TranslatableModel):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+
+    translations = TranslatedFields(
+        localized_name=models.CharField(_("localized_name"), max_length=200)
+    )
 
     def __str__(self):
         return self.question_text
