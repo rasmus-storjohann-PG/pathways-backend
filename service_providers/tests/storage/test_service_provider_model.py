@@ -1,21 +1,26 @@
+from decimal import Decimal
 from django.test import TestCase
 from service_providers import models
-from decimal import *
 
 class TestServiceProviderModel(TestCase):
-    def test_can_create_service_provider(self):
+    def setUp(self):
+        self.name = 'The service provider name'
+        self.latitude = Decimal('123.456')
+        self.longitude = Decimal('234.567')
+
         provider = models.ServiceProvider()
-        provider.name = "The name"
-        provider.latitude = 123.456
-        provider.longitude = 123.456
+        provider.name = self.name
+        provider.latitude = self.latitude
+        provider.longitude = self.longitude
         provider.save()
-        provider_from_db = models.ServiceProvider.objects.get()
-        self.assertEqual(provider_from_db.name, "The name")
+
+        self.provider_from_db = models.ServiceProvider.objects.get()
+
+    def test_has_name(self):
+        self.assertEqual(self.provider_from_db.name, self.name)
 
     def test_has_latitude(self):
-        provider = models.ServiceProvider()
-        provider.latitude = 123.456
-        provider.longitude = 123.456
-        provider.save()
-        provider_from_db = models.ServiceProvider.objects.get()
-        self.assertEqual(provider_from_db.latitude, Decimal('123.456000'))
+        self.assertEqual(self.provider_from_db.latitude, self.latitude)
+
+    def test_has_longitude(self):
+        self.assertEqual(self.provider_from_db.longitude, self.longitude)
