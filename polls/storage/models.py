@@ -13,9 +13,6 @@ class Question(TranslatableModel):
     def __str__(self):
         return self.question_text
 
-    def __unicode__(self):
-        return self.localized_name
-
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE)
