@@ -1,29 +1,39 @@
 from decimal import Decimal
 from django.test import TestCase
 from service_providers import models
+from service_providers.tests.helpers import ServiceProviderBuilder
 
 class TestServiceProviderModel(TestCase):
-    def setUp(self):
-        self.name = 'The service provider name'
-        self.latitude = Decimal('123.456')
-        self.longitude = Decimal('234.567')
-
-        provider = models.ServiceProvider()
-        provider.name = self.name
-        provider.latitude = self.latitude
-        provider.longitude = self.longitude
-        provider.save()
-
-        self.provider_from_db = models.ServiceProvider.objects.get()
-
     def test_has_name(self):
-        self.assertEqual(self.provider_from_db.name, self.name)
+        name = 'The service provider name'
+        provider = ServiceProviderBuilder().with_name(name).build()
+        provider.save()
+        provider_from_db = models.ServiceProvider.objects.get()
+        self.assertEqual(provider_from_db.name, name)
 
     def test_has_latitude(self):
-        self.assertEqual(self.provider_from_db.latitude, self.latitude)
+        latitude = Decimal('123.456')
+        provider = ServiceProviderBuilder().with_latitude(latitude).build()
+        provider.save()
+        provider_from_db = models.ServiceProvider.objects.get()
+        self.assertEqual(provider_from_db.latitude, latitude)
 
     def test_has_longitude(self):
-        self.assertEqual(self.provider_from_db.longitude, self.longitude)
+        longitude = Decimal('234.567')
+        provider = ServiceProviderBuilder().with_longitude(longitude).build()
+        provider.save()
+        provider_from_db = models.ServiceProvider.objects.get()
+        self.assertEqual(provider_from_db.longitude, longitude)
 
-    def test_has_description(self):
-        self.assertEqual(self.provider_from_db.description, None)
+    def test_can_set_description(self):
+        description = 'The service provider description'
+        provider = ServiceProviderBuilder().with_description(description).build()
+        provider.save()
+        provider_from_db = models.ServiceProvider.objects.get()
+        self.assertEqual(provider_from_db.description, description)
+
+    def test_description_is_optional(self):
+        provider = ServiceProviderBuilder().with_description(None).build()
+        provider.save()
+        provider_from_db = models.ServiceProvider.objects.get()
+        self.assertEqual(provider_from_db.description, None)
