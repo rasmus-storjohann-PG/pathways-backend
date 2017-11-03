@@ -37,3 +37,19 @@ class TestServiceProviderModel(TestCase):
         provider.save()
         provider_from_db = models.ServiceProvider.objects.get()
         self.assertEqual(provider_from_db.description, None)
+
+    def test_description_is_multilingual(self):
+        provider = ServiceProviderBuilder().build()
+
+        provider.set_current_language('en')
+        provider.description = 'In English'
+        provider.set_current_language('fr')
+        provider.description = 'En français'
+        provider.save()
+
+        provider_from_db = models.ServiceProvider.objects.get()
+
+        provider_from_db.set_current_language('en')
+        self.assertEqual(provider_from_db.description, 'In English')
+        provider_from_db.set_current_language('fr')
+        self.assertEqual(provider_from_db.description, 'En français')
