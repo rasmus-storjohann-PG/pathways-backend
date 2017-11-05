@@ -4,6 +4,7 @@ from django.contrib import admin
 # pylint: disable=invalid-name
 urlpatterns = [
     url(r'^v1/forms/polls/', include('polls.web.urls')),
-    url(r'^v1/', include('polls.web.api')),
+    url(r'^v1/polls/', include('polls.web.api')),
+    url(r'^v1/service_providers', include('service_providers.web.urls')),
     url(r'^v1/admin/', admin.site.urls),
 ]

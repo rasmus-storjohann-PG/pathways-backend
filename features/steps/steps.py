@@ -1,26 +1,26 @@
 from behave import given, when, then
 
 KEY = 1
-QUESTION_URL = '/v1/questions/{0}/'.format(KEY)
+QUESTION_URL = '/v1/polls/questions/{0}/'.format(KEY)
 
 @given(u'a question')
 def given_a_question(context):
     data = {'pub_date': '2017-10-17T12:34:56Z', 'question_text': "Original question"}
-    url = '/v1/questions/'
+    url = '/v1/polls/questions/'
     context.response = context.test.client.post(url, data)
     context.test.assertEqual(context.response.status_code, 201)
 
 @given(u'a question with text "{text}"')
 def given_a_question_with_text(context, text):
     data = {'pub_date': '2017-10-17T12:34:56Z', 'question_text': text}
-    url = '/v1/questions/'
+    url = '/v1/polls/questions/'
     context.response = context.test.client.post(url, data)
     context.test.assertEqual(context.response.status_code, 201)
 
 @when(u'I create a question with text "{text}"')
 def when_i_create_a_question(context, text):
     data = {'pub_date': '2017-10-17T12:34:56Z', 'question_text': text}
-    url = '/v1/questions/'
+    url = '/v1/polls/questions/'
     context.response = context.test.client.post(url, data)
     context.test.assertEqual(context.response.status_code, 201)
 
