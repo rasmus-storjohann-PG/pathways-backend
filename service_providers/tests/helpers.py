@@ -6,7 +6,7 @@ class ServiceProviderBuilder:
         self.name = ''
         self.latitude = Decimal('0.0')
         self.longitude = Decimal('0.0')
-        self.description = None
+        self.description = ''
 
     def with_name(self, name):
         self.name = name

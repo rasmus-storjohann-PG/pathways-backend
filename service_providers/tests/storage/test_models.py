@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.test import TestCase
+from django.db import utils as django_utils
 from service_providers import models
 from service_providers.tests.helpers import ServiceProviderBuilder
 
@@ -32,11 +33,16 @@ class TestServiceProviderModel(TestCase):
         provider_from_db = models.ServiceProvider.objects.get()
         self.assertEqual(provider_from_db.description, description)
 
-    def test_description_is_optional(self):
-        provider = ServiceProviderBuilder().with_description(None).build()
+    def test_description_can_be_empty(self):
+        provider = ServiceProviderBuilder().with_description('').build()
         provider.save()
         provider_from_db = models.ServiceProvider.objects.get()
-        self.assertEqual(provider_from_db.description, None)
+        self.assertEqual(provider_from_db.description, '')
+
+    def test_description_is_required(self):
+        provider = ServiceProviderBuilder().with_description(None).build()
+        with self.assertRaises(django_utils.IntegrityError):
+            provider.save()
 
     def test_description_is_multilingual(self):
         provider = ServiceProviderBuilder().build()

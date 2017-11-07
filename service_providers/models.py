@@ -6,7 +6,7 @@ class ServiceProvider(TranslatableModel):
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     translations = TranslatedFields(
-        description=models.TextField(null=True)
+        description=models.TextField(blank=True)
     )
 
     def __str__(self):
