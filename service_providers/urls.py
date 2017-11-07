@@ -1,6 +1,6 @@
 from rest_framework import routers
 from django.conf.urls import url, include
-from service_providers.web import viewsets
+from service_providers import viewsets
 
 def build_urlpatterns():
     router = routers.DefaultRouter()
