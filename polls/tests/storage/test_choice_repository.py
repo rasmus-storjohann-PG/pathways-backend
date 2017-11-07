@@ -5,17 +5,16 @@ from polls.tests import helpers
 
 class TestChoiceRepository(TestCase):
     def setUp(self):
-        logging.disable(logging.CRITICAL) 
+        logging.disable(logging.CRITICAL)
 
         self.votes = 34
         self.choice_text = "bar"
         self.question = helpers.create_question(question_text="foo", days=-30)
-        self.choice = self.question.choices.create(choice_text=self.choice_text, \
-                                                      votes=self.votes)
+        self.choice = self.question.choices.create(choice_text=self.choice_text, votes=self.votes)
         self.repository = repositories.ChoiceRepository()
 
     def test_get_choice_returns_choice_based_on_question_id_and_choice_id(self):
-        choice = self.repository.get_choice_by_question_id_and_choice_id(self.question.id,\
+        choice = self.repository.get_choice_by_question_id_and_choice_id(self.question.id,
                                                                          self.choice.id)
         self.assertEqual(choice.question, self.question)
         self.assertEqual(choice.choice_text, self.choice_text)
@@ -24,13 +23,13 @@ class TestChoiceRepository(TestCase):
     def test_get_choice_throws_on_no_matching_question(self):
         invalid_question_id = 234
         with self.assertRaises(models.Question.DoesNotExist):
-            self.repository.get_choice_by_question_id_and_choice_id(invalid_question_id, \
+            self.repository.get_choice_by_question_id_and_choice_id(invalid_question_id,
                                                                     self.choice.id)
 
     def test_get_choice_throws_on_no_matching_choice(self):
         invalid_choice_id = 434
         with self.assertRaises(models.Choice.DoesNotExist):
-            self.repository.get_choice_by_question_id_and_choice_id(self.question.id, \
+            self.repository.get_choice_by_question_id_and_choice_id(self.question.id,
                                                                     invalid_choice_id)
 
     def test_save_choice_updates_value_in_database(self):
