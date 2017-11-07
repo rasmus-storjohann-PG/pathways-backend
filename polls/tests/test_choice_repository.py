@@ -1,6 +1,6 @@
 import logging
 from django.test import TestCase
-from polls.storage import models, repositories
+from polls import models, repositories
 from polls.tests import helpers
 
 class TestChoiceRepository(TestCase):

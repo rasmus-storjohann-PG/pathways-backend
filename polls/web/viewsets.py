@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from polls.storage import models
+from polls import models
 from polls.web import serializers
 
 class QuestionViewSet(viewsets.ModelViewSet):
