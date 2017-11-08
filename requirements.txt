@@ -1,7 +1,9 @@
+## The following requirements were added by pip freeze:
 astroid==1.5.3
 behave==1.2.5
 behave-django==0.5.0
 Django==1.11.5
+django-cors-headers==2.1.0
 django-extensions==1.9.6
 django-parler==1.8
 djangorestframework==3.7.0
