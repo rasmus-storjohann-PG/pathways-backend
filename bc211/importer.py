@@ -22,7 +22,8 @@ def save_records(records):
 def build_active_record(record):
     active_record = models.ServiceProvider()
     active_record.name = record.name
-    active_record.latitude = record.latitude
-    active_record.longitude = record.longitude
+    has_location = record.spatial_location is not None
+    active_record.latitude = record.spatial_location.latitude if has_location else None
+    active_record.longitude = record.spatial_location.longitude if has_location else None
     active_record.description = record.description
     return active_record

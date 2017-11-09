@@ -20,10 +20,10 @@ class TestParsingOfOneServiceProviderRecord(unittest.TestCase):
         self.assertEqual(self.service_provider.description[:30], 'Provides inclusive, family-cen')
 
     def test_can_parse_latitude(self):
-        self.assertAlmostEqual(self.service_provider.latitude, 49.087284)
+        self.assertAlmostEqual(self.service_provider.spatial_location.latitude, 49.087284)
 
     def test_can_parse_longitude(self):
-        self.assertAlmostEqual(self.service_provider.longitude, -122.607918)
+        self.assertAlmostEqual(self.service_provider.spatial_location.longitude, -122.607918)
 
 class TestParsingOfMultipleServiceProviderRecord(unittest.TestCase):
     def test_parse_many_service_providers(self):

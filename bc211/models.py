@@ -7,8 +7,6 @@ class SpatialLocation:
 
 class ServiceProvider:
     def __init__(self, name, description, spatial_location):
-        has_spatial_location = spatial_location is not None
-        self.latitude = spatial_location.latitude if has_spatial_location else None
-        self.longitude = spatial_location.longitude if has_spatial_location else None
         self.name = name
         self.description = description
+        self.spatial_location = spatial_location
