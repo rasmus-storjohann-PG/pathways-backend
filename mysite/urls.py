@@ -1,10 +1,17 @@
 from django.conf.urls import url, include
 from django.contrib import admin
+from service_providers import viewsets as service_providers_viewsets
+from rest_framework import routers
+
+def build_router():
+    router = routers.DefaultRouter()
+    router.register(r'^service-providers', service_providers_viewsets.ServiceProviderViewSet)
+    return router
 
 # pylint: disable=invalid-name
 urlpatterns = [
-    url(r'^v1/forms/polls/', include('polls.web.urls')),
-    url(r'^v1/polls/', include('polls.web.api')),
-    url(r'^v1/service-providers', include('service_providers.urls')),
-    url(r'^v1/admin/', admin.site.urls),
+    url(r'^v1/', include(build_router().urls)),
+    url(r'^admin/', admin.site.urls),
+    url(r'^v0/forms/polls/', include('polls.web.urls')),
+    url(r'^v0/polls/', include('polls.web.api')),
 ]

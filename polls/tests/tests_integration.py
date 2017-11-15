@@ -3,13 +3,13 @@ from rest_framework import test as rest_test
 
 def create_question_entity(client):
     data = {'pub_date': '2017-10-17T12:34:56Z', 'question_text': 'Original question'}
-    url = '/v1/polls/questions/'
+    url = '/v0/polls/questions/'
     return client.post(url, data)
 
 def create_choice_entity(client, question):
     data = {'choice_text': 'Original choice', 'votes': 3}
     parent_key = question.json()['pk']
-    url = '/v1/polls/questions/{0}/choices/'.format(parent_key)
+    url = '/v0/polls/questions/{0}/choices/'.format(parent_key)
     return client.post(url, data)
 
 
@@ -17,7 +17,7 @@ class QuestionEntityTests(rest_test.APITestCase):
     def setUp(self):
         self.post_response = create_question_entity(self.client)
         primary_key = self.post_response.json()['pk']
-        self.url = '/v1/polls/questions/{0}/'.format(primary_key)
+        self.url = '/v0/polls/questions/{0}/'.format(primary_key)
 
     def test_can_create_entity(self):
         self.assertEqual(self.post_response.status_code, 201)
@@ -47,7 +47,7 @@ class ChoiceEntityTests(rest_test.APITestCase):
         self.post_response = create_choice_entity(self.client, self.parent_post_response)
         self.parent_key = self.parent_post_response.json()['pk']
         self.child_key = self.post_response.json()['pk']
-        self.url = '/v1/polls/questions/{0}/choices/{1}/'.format(self.parent_key, self.child_key)
+        self.url = '/v0/polls/questions/{0}/choices/{1}/'.format(self.parent_key, self.child_key)
 
     def test_can_create_entity(self):
         self.assertEqual(self.post_response.status_code, 201)
@@ -74,7 +74,7 @@ class ChoiceEntityTests(rest_test.APITestCase):
     def test_can_vote_on_choice(self):
         get_response = self.client.get(self.url)
         self.assertEqual(get_response.json()['votes'], 3)
-        vote_url = '/v1/polls/questions/{0}/choices/{1}/vote'.format(self.parent_key, self.child_key)
+        vote_url = '/v0/polls/questions/{0}/choices/{1}/vote'.format(self.parent_key, self.child_key)
         post_response = self.client.post(vote_url, content_type='application/json')
         # TODO not sure if 301 is the right response here, watch for missing /
         self.assertEqual(post_response.status_code, 301)
@@ -87,10 +87,10 @@ class QuestionChoiceEntityTests(rest_test.APITestCase):
     def setUp(self):
         parent_post_response = create_question_entity(self.client)
         parent_key = parent_post_response.json()['pk']
-        self.parent_url = '/v1/polls/questions/{0}/'.format(parent_key)
+        self.parent_url = '/v0/polls/questions/{0}/'.format(parent_key)
         self.post_response = create_choice_entity(self.client, parent_post_response)
         child_key = self.post_response.json()['pk']
-        self.url = '/v1/polls/questions/{0}/choices/{1}/'.format(parent_key, child_key)
+        self.url = '/v0/polls/questions/{0}/choices/{1}/'.format(parent_key, child_key)
 
     def test_can_get_entity(self):
         get_response = self.client.get(self.parent_url)
