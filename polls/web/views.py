@@ -5,8 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from polls import business_logic
-from polls.storage import models, repositories
+from polls import business_logic, models, repositories
 
 LOGGER = logging.getLogger(__name__)
 

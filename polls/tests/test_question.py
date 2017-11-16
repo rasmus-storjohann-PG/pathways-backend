@@ -1,7 +1,7 @@
 import datetime
 from django.test import TestCase
 from django.utils import timezone
-from polls.storage import models
+from polls import models
 from polls import business_logic
 
 class TestQuestion(TestCase):
