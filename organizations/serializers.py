@@ -4,4 +4,4 @@ from organizations import models
 class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Organization
-        fields = ('pk', 'identifier')
+        fields = ('id', 'name', 'description', 'website', 'email')
