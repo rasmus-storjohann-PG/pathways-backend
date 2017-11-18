@@ -92,17 +92,24 @@ class TestOrganizationModel(TestCase):
         organization_from_db = validate_save_and_reload(organization)
         self.assertEqual(organization_from_db.website, website)
 
-    def test_website_can_be_none(self):
-        blank_website = None
-        organization = OrganizationBuilder().with_website(blank_website).build()
-        organization_from_db = validate_save_and_reload(organization)
-        self.assertEqual(organization_from_db.website, blank_website)
-
     def test_website_must_be_valid(self):
         invalid_website = 'not a valid website address'
         organization = OrganizationBuilder().with_website(invalid_website).build()
         with self.assertRaises(exceptions.ValidationError):
             organization.full_clean()
+
+    def test_website_can_be_none(self):
+        no_website = None
+        organization = OrganizationBuilder().with_website(no_website).build()
+        organization_from_db = validate_save_and_reload(organization)
+        self.assertEqual(organization_from_db.website, no_website)
+
+    def test_empty_website_is_saved_as_none(self):
+        empty_website = ''
+        no_website = None
+        organization = OrganizationBuilder().with_website(empty_website).build()
+        organization_from_db = validate_save_and_reload(organization)
+        self.assertEqual(organization_from_db.website, no_website)
 
     def test_has_email_field(self):
         email = 'someone@example.org'
@@ -116,8 +123,15 @@ class TestOrganizationModel(TestCase):
         with self.assertRaises(exceptions.ValidationError):
             organization.full_clean()
 
-    def test_email_can_be_none(self):
-        blank_email = None
-        organization = OrganizationBuilder().with_email(blank_email).build()
+    def test_email_can_be_empty(self):
+        no_email = None
+        organization = OrganizationBuilder().with_email(no_email).build()
         organization_from_db = validate_save_and_reload(organization)
-        self.assertEqual(organization_from_db.email, blank_email)
+        self.assertEqual(organization_from_db.email, no_email)
+
+    def test_empty_email_is_saved_as_none(self):
+        empty_email = ''
+        no_email = None
+        organization = OrganizationBuilder().with_email(empty_email).build()
+        organization_from_db = validate_save_and_reload(organization)
+        self.assertEqual(organization_from_db.email, no_email)

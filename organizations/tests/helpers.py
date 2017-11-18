@@ -3,10 +3,10 @@ from organizations import models
 class OrganizationBuilder:
     def __init__(self):
         self.id = 'default_id'
-        self.name = ''
-        self.description = ''
-        self.website = ''
-        self.email = ''
+        self.name = 'default name'
+        self.description = 'default description'
+        self.website = 'http://www.example.com'
+        self.email = 'someone@example.com'
 
     def with_id(self, id):
         self.id = id
