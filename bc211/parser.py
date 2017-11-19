@@ -48,4 +48,11 @@ def parse_email(agency_xml):
 
 def parse_website(agency_xml):
     website = agency_xml.find('URL/Address')
-    return None if website is None else website.text
+    if website is None:
+        return None
+    return website_with_http_prefix(website.text)
+
+def website_with_http_prefix(website):
+    if website.startswith('http'):
+        return website
+    return 'http://' + website

@@ -45,7 +45,7 @@ class OrganizationImportTests(TestCase):
         self.assertEqual(self.organization.description[:30], 'Provides inclusive, family-cen')
 
     def test_can_import_website(self):
-        self.assertEqual(self.organization.website, 'www.langleycdc.com')
+        self.assertEqual(self.organization.website, 'http://www.langleycdc.com')
 
     def test_can_import_email(self):
         self.assertEqual(self.organization.email, 'info@langleycdc.com')
