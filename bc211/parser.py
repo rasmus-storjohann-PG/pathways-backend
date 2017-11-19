@@ -5,11 +5,11 @@ def parse(xml_data_as_string):
     root_xml = etree.fromstring(xml_data_as_string)
     all_providers_xml = root_xml.findall('Agency')
     result = models.ParserResult()
-    result.service_providers = map(parse_one_service_provider, all_providers_xml)
-    result.organizations = map(parse_one_organization, all_providers_xml)
+    result.service_providers = map(parse_service_provider, all_providers_xml)
+    result.organizations = map(parse_organization, all_providers_xml)
     return result
 
-def parse_one_service_provider(provider_xml):
+def parse_service_provider(provider_xml):
     name = parse_name(provider_xml)
     description = parse_description(provider_xml)
     spatial_location = parse_spatial_location_if_defined(provider_xml)
@@ -28,22 +28,24 @@ def parse_spatial_location_if_defined(provider_xml):
         return None
     return models.SpatialLocation(latitude.text, longitude.text)
 
-def parse_one_organization(agency_xml):
-    id = agency_xml.find('Key').text
+def parse_organization(agency_xml):
+    id = parse_id(agency_xml)
     name = parse_name(agency_xml)
-    description = agency_xml.find('AgencyDescription').text
+    description = parse_agency_description(agency_xml)
     website = parse_website(agency_xml)
     email = parse_email(agency_xml)
     return models.Organization(id, name, description, website, email)
 
+def parse_id(agency_xml):
+    return agency_xml.find('Key').text
+
+def parse_agency_description(agency_xml):
+    return agency_xml.find('AgencyDescription').text
+
 def parse_email(agency_xml):
     email = agency_xml.find('Email/Address')
-    if email is None:
-        return None
-    return email.text
+    return None if email is None else email.text
 
 def parse_website(agency_xml):
     website = agency_xml.find('URL/Address')
-    if website is None:
-        return None
-    return website.text
+    return None if website is None else website.text

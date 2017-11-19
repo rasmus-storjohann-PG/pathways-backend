@@ -21,10 +21,10 @@ class Organization(TranslatableModel):
         return super(Organization, self).save(*args, **kwargs)
 
     def clean(self):
-        self.set_empty_fields_to_none()
+        self.set_empty_fields_to_null()
         super(Organization, self).clean()
 
-    def set_empty_fields_to_none(self):
+    def set_empty_fields_to_null(self):
         for field in self.all_fields():
             if self.can_be_null(field) and self.is_empty(field):
                 self.set_to_null(field)

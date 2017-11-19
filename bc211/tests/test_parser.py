@@ -20,7 +20,7 @@ class OrganizationParserTests(unittest.TestCase):
         xml = file_open_for_reading.read()
         root = etree.fromstring(xml)
         agency_xml = root.find('Agency')
-        self.organization = parser.parse_one_organization(agency_xml)
+        self.organization = parser.parse_organization(agency_xml)
 
     def test_can_parse_id(self):
         self.assertEqual(self.organization.id, '9487364')
@@ -44,7 +44,7 @@ class ServiceProviderParserTests(unittest.TestCase):
         xml = file_open_for_reading.read()
         root = etree.fromstring(xml)
         provider = root.find('Agency')
-        self.service_provider = parser.parse_one_service_provider(provider)
+        self.service_provider = parser.parse_service_provider(provider)
 
     def test_can_parse_name(self):
         self.assertEqual(self.service_provider.name, 'Langley Child Development Centre')

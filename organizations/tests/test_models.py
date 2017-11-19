@@ -4,7 +4,6 @@ from organizations import models
 from organizations.tests.helpers import OrganizationBuilder
 
 def validate_save_and_reload(organization):
-    organization.full_clean()
     organization.save()
     return models.Organization.objects.get()
 
