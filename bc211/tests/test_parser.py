@@ -39,9 +39,9 @@ class BC211ParserTests(unittest.TestCase):
 class OrganizationParserTests(unittest.TestCase):
     def setUp(self):
         root = etree.fromstring(open(REAL_211_DATA_SET, 'r').read())
-        self.from_real_data = parser.parse_organization(root.find('Agency'))
+        self.from_real_data = parser.parse_agency(root.find('Agency'))
         root = etree.fromstring(MINIMAL_211_DATA_SET)
-        self.from_minimal_data = parser.parse_organization(root.find('Agency'))
+        self.from_minimal_data = parser.parse_agency(root.find('Agency'))
 
     def test_can_parse_id(self):
         self.assertEqual(self.from_real_data.id, '9487364')
