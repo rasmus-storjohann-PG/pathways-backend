@@ -9,9 +9,11 @@ MULTI_AGENCY_FIXTURE = 'bc211/data/BC211_data_excerpt.xml'
 
 class DataImporterTestsForSingleRecord(TestCase):
     def setUp(self):
-        save_records_to_database(read_records_from_file(ONE_AGENCY_FIXTURE))
-        all_records = models.ServiceProvider.objects.all()
-        self.record = all_records[0]
+        file = open(ONE_AGENCY_FIXTURE, 'r')
+        records = read_records_from_file(file)
+        save_records_to_database(records)
+        all_records_from_database = models.ServiceProvider.objects.all()
+        self.record = all_records_from_database[0]
 
     def test_can_import_name(self):
         self.assertEqual(self.record.name, 'Langley Child Development Centre')
@@ -27,6 +29,6 @@ class DataImporterTestsForSingleRecord(TestCase):
 
 class DataImporterTestsForMultipleRecord(TestCase):
     def test_can_import_multiple_records(self):
-        save_records_to_database(read_records_from_file(MULTI_AGENCY_FIXTURE))
+        save_records_to_database(read_records_from_file(open(MULTI_AGENCY_FIXTURE, 'r')))
         all_records = models.ServiceProvider.objects.all()
         self.assertEqual(len(all_records), 16)

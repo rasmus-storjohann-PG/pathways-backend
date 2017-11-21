@@ -1,4 +1,5 @@
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils.six import StringIO
 
@@ -18,5 +19,5 @@ class TestImportBc211Data(TestCase):
 
     def test_import_invalid_file(self):
         out = StringIO()
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaises(CommandError):
             call_command('import_bc211_data', 'NonExistentFile', stdout=out)

@@ -4,7 +4,7 @@ from bc211 import models
 def parse_all_service_providers(xml_data_as_string):
     root_xml = etree.fromstring(xml_data_as_string)
     all_providers_xml = root_xml.findall('Agency')
-    return list(map(parse_one_service_provider, all_providers_xml))
+    return map(parse_one_service_provider, all_providers_xml)
 
 def parse_one_service_provider(provider_xml):
     name = parse_name(provider_xml)

@@ -30,4 +30,4 @@ class TestParsingOfMultipleServiceProviderRecord(unittest.TestCase):
         file_open_for_reading = open(MULTI_AGENCY_FIXTURE, 'r')
         xml = file_open_for_reading.read()
         all_service_providers = parser.parse_all_service_providers(xml)
-        self.assertEqual(len(all_service_providers), 16)
+        self.assertEqual(len(list(all_service_providers)), 16)
