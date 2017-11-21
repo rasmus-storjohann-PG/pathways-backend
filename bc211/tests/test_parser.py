@@ -6,11 +6,11 @@ ONE_AGENCY_FIXTURE = 'bc211/data/BC211_data_one_agency.xml'
 MULTI_AGENCY_FIXTURE = 'bc211/data/BC211_data_excerpt.xml'
 
 class BC211ParserTests(unittest.TestCase):
-    def test_parse_many_service_providers(self):
+    def test_parse_many_locations(self):
         file_open_for_reading = open(MULTI_AGENCY_FIXTURE, 'r')
         xml = file_open_for_reading.read()
         parser_result = parser.parse(xml)
-        self.assertEqual(len(list(parser_result.service_providers)), 16)
+        self.assertEqual(len(list(parser_result.locations)), 16)
         self.assertEqual(len(list(parser_result.organizations)), 16)
 
 
@@ -38,22 +38,22 @@ class OrganizationParserTests(unittest.TestCase):
         self.assertEqual(self.organization.email, 'info@langleycdc.com')
 
 
-class ServiceProviderParserTests(unittest.TestCase):
+class LocationParserTests(unittest.TestCase):
     def setUp(self):
         file_open_for_reading = open(ONE_AGENCY_FIXTURE, 'r')
         xml = file_open_for_reading.read()
         root = etree.fromstring(xml)
-        provider = root.find('Agency')
-        self.service_provider = parser.parse_service_provider(provider)
+        location = root.find('Agency')
+        self.location = parser.parse_location(location)
 
     def test_can_parse_name(self):
-        self.assertEqual(self.service_provider.name, 'Langley Child Development Centre')
+        self.assertEqual(self.location.name, 'Langley Child Development Centre')
 
     def test_can_parse_description(self):
-        self.assertEqual(self.service_provider.description[:30], 'Provides inclusive, family-cen')
+        self.assertEqual(self.location.description[:30], 'Provides inclusive, family-cen')
 
     def test_can_parse_latitude(self):
-        self.assertAlmostEqual(self.service_provider.spatial_location.latitude, 49.087284)
+        self.assertAlmostEqual(self.location.spatial_location.latitude, 49.087284)
 
     def test_can_parse_longitude(self):
-        self.assertAlmostEqual(self.service_provider.spatial_location.longitude, -122.607918)
+        self.assertAlmostEqual(self.location.spatial_location.longitude, -122.607918)

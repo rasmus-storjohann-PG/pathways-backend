@@ -1,7 +1,7 @@
 from decimal import Decimal
-from service_providers import models
+from locations import models
 
-class ServiceProviderBuilder:
+class LocationBuilder:
     def __init__(self):
         self.name = ''
         self.latitude = Decimal('0.0')
@@ -25,7 +25,7 @@ class ServiceProviderBuilder:
         return self
 
     def build(self):
-        result = models.ServiceProvider()
+        result = models.Location()
         result.name = self.name
         result.latitude = self.latitude
         result.longitude = self.longitude

@@ -21,7 +21,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
-    'service_providers.apps.ServiceProvidersConfig',
+    'locations.apps.LocationsConfig',
     'organizations.apps.OrganizationsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

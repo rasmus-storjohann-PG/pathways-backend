@@ -19,7 +19,7 @@ class Command(BaseCommand):
         records = read_records_from_file(path)
         counts = save_records_to_database(records)
 
-        message_template = 'Successfully imported {0} organization(s) and {1} service providers(s)'
+        message_template = 'Successfully imported {0} organization(s) and {1} location(s)'
         status_message = message_template.format(counts['number_of_organizations'],
-                                                 counts['number_of_service_providers'])
+                                                 counts['number_of_locations'])
         self.stdout.write(self.style.SUCCESS(status_message))

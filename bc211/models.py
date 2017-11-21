@@ -2,7 +2,7 @@ from bc211 import validators
 
 class ParserResult:
     organizations = []
-    service_providers = []
+    locations = []
 
 class Organization:
     def __init__(self, id, name, description, website, email):
@@ -12,7 +12,7 @@ class Organization:
         self.website = website
         self.email = email
 
-class ServiceProvider:
+class Location:
     def __init__(self, name, description, spatial_location):
         self.name = name
         self.description = description

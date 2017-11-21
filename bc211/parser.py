@@ -4,27 +4,27 @@ from bc211 import models
 
 def parse(xml_data_as_string):
     root_xml = etree.fromstring(xml_data_as_string)
-    all_providers_xml = root_xml.findall('Agency')
+    all_locations_xml = root_xml.findall('Agency')
     result = models.ParserResult()
-    result.service_providers = map(parse_service_provider, all_providers_xml)
-    result.organizations = map(parse_organization, all_providers_xml)
+    result.locations = map(parse_location, all_locations_xml)
+    result.organizations = map(parse_organization, all_locations_xml)
     return result
 
-def parse_service_provider(provider_xml):
-    name = parse_name(provider_xml)
-    description = parse_description(provider_xml)
-    spatial_location = parse_spatial_location_if_defined(provider_xml)
-    return models.ServiceProvider(name, description, spatial_location)
+def parse_location(location_xml):
+    name = parse_name(location_xml)
+    description = parse_description(location_xml)
+    spatial_location = parse_spatial_location_if_defined(location_xml)
+    return models.Location(name, description, spatial_location)
 
-def parse_name(provider_xml):
-    return provider_xml.find('Name').text
+def parse_name(location_xml):
+    return location_xml.find('Name').text
 
-def parse_description(provider_xml):
-    return provider_xml.find('AgencyDescription').text
+def parse_description(location_xml):
+    return location_xml.find('AgencyDescription').text
 
-def parse_spatial_location_if_defined(provider_xml):
-    latitude = provider_xml.find('./Site/SpatialLocation/Latitude')
-    longitude = provider_xml.find('./Site/SpatialLocation/Longitude')
+def parse_spatial_location_if_defined(location_xml):
+    latitude = location_xml.find('./Site/SpatialLocation/Latitude')
+    longitude = location_xml.find('./Site/SpatialLocation/Longitude')
     if latitude is None or longitude is None:
         return None
     return models.SpatialLocation(latitude.text, longitude.text)
