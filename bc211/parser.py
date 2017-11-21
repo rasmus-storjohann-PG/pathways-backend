@@ -11,16 +11,16 @@ def parse(xml_data_as_string):
     return result
 
 def parse_location(location_xml):
-    name = parse_name(location_xml)
+    name = parse_location_name(location_xml)
     description = parse_description(location_xml)
     spatial_location = parse_spatial_location_if_defined(location_xml)
     return models.Location(name, description, spatial_location)
 
-def parse_name(location_xml):
-    return location_xml.find('Name').text
+def parse_location_name(location_xml):
+    return location_xml.find('Site/Name').text
 
 def parse_description(location_xml):
-    return location_xml.find('AgencyDescription').text
+    return location_xml.find('Site/SiteDescription').text
 
 def parse_spatial_location_if_defined(location_xml):
     latitude = location_xml.find('./Site/SpatialLocation/Latitude')
@@ -31,7 +31,7 @@ def parse_spatial_location_if_defined(location_xml):
 
 def parse_organization(agency_xml):
     id = parse_id(agency_xml)
-    name = parse_name(agency_xml)
+    name = parse_agency_name(agency_xml)
     description = parse_agency_description(agency_xml)
     website = parse_website(agency_xml)
     email = parse_email(agency_xml)
@@ -39,6 +39,9 @@ def parse_organization(agency_xml):
 
 def parse_id(agency_xml):
     return agency_xml.find('Key').text
+
+def parse_agency_name(location_xml):
+    return location_xml.find('Name').text
 
 def parse_agency_description(agency_xml):
     return agency_xml.find('AgencyDescription').text
