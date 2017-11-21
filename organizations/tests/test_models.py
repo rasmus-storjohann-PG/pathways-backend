@@ -5,11 +5,17 @@ from organizations.tests.helpers import OrganizationBuilder
 
 class TestOrganizationModel(TestCase):
     def test_has_id(self):
-        id = 'the_id' # TODO add validation that id does not contain space and other problematic characters
+        id = 'the_id'
         organization = OrganizationBuilder().with_id(id).build()
         organization.save()
         organization_from_db = models.Organization.objects.get()
         self.assertEqual(organization_from_db.id, id)
+
+    def test_id_cannot_be_none(self):
+        id = None
+        organization = OrganizationBuilder().with_id(id).build()
+        with self.assertRaises(exceptions.ValidationError):
+            organization.full_clean()
 
     def test_id_cannot_be_empty(self):
         id = ''
@@ -77,8 +83,8 @@ class TestOrganizationModel(TestCase):
         organization_from_db = models.Organization.objects.get()
         self.assertEqual(organization_from_db.website, website)
 
-    def test_website_can_be_blank(self):
-        blank_website = ''
+    def test_website_can_be_none(self):
+        blank_website = None
         organization = OrganizationBuilder().with_website(blank_website).build()
         organization.save()
         organization_from_db = models.Organization.objects.get()
@@ -103,8 +109,8 @@ class TestOrganizationModel(TestCase):
         with self.assertRaises(exceptions.ValidationError):
             organization.full_clean()
 
-    def test_email_can_be_blank(self):
-        blank_email = ''
+    def test_email_can_be_none(self):
+        blank_email = None
         organization = OrganizationBuilder().with_email(blank_email).build()
         organization.save()
         organization_from_db = models.Organization.objects.get()
