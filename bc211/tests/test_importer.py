@@ -1,7 +1,7 @@
 import unittest
 from decimal import Decimal
 from django.test import TestCase
-from bc211.importer import read_from_xml_and_save_to_database
+from bc211.importer import read_records_from_file, save_records_to_database
 from service_providers import models
 
 ONE_AGENCY_FIXTURE = 'bc211/data/BC211_data_one_agency.xml'
@@ -9,7 +9,7 @@ MULTI_AGENCY_FIXTURE = 'bc211/data/BC211_data_excerpt.xml'
 
 class DataImporterTestsForSingleRecord(TestCase):
     def setUp(self):
-        read_from_xml_and_save_to_database(ONE_AGENCY_FIXTURE)
+        save_records_to_database(read_records_from_file(ONE_AGENCY_FIXTURE))
         all_records = models.ServiceProvider.objects.all()
         self.record = all_records[0]
 
@@ -27,6 +27,6 @@ class DataImporterTestsForSingleRecord(TestCase):
 
 class DataImporterTestsForMultipleRecord(TestCase):
     def test_can_import_multiple_records(self):
-        read_from_xml_and_save_to_database(MULTI_AGENCY_FIXTURE)
+        save_records_to_database(read_records_from_file(MULTI_AGENCY_FIXTURE))
         all_records = models.ServiceProvider.objects.all()
         self.assertEqual(len(all_records), 16)

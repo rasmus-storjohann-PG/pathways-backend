@@ -2,16 +2,17 @@ from bc211 import parser
 from service_providers import models
 from django.utils import translation
 
-def read_from_xml_and_save_to_database(path):
-    translation.activate('en')
+def read_records_from_file(path):
     xml = read_file(path)
-    parsed_records = parser.parse_all_service_providers(xml)
-    save_records(parsed_records)
-    return len(parsed_records)
+    return parser.parse_all_service_providers(xml)
 
 def read_file(path):
     file_handle = open(path, 'r')
     return file_handle.read()
+
+def save_records_to_database(records):
+    translation.activate('en')
+    save_records(records)
 
 def save_records(records):
     for record in records:
