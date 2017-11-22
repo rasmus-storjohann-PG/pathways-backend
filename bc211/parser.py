@@ -7,7 +7,7 @@ def parse(xml_data_as_string):
     agencies = root_xml.findall('Agency')
     result = models.ParserResult()
     result.organizations = map(parse_agency, agencies)
-    result.locations = map(parse_location, agencies)
+    result.locations = map(parse_site, agencies)
     return result
 
 def parse_agency(agency):
@@ -42,21 +42,25 @@ def website_with_http_prefix(website):
     url_with_extra_slash = urlparse.urlunparse(parts)
     return url_with_extra_slash.replace('///', '//')
 
-def parse_location(agency):
-    name = parse_site_name(agency)
-    description = parse_site_description(agency)
-    spatial_location = parse_spatial_location_if_defined(agency)
+def parse_sites(agency):
+    sites = agency.findall('Site')
+    return map(parse_site, sites)
+
+def parse_site(site):
+    name = parse_site_name(site)
+    description = parse_site_description(site)
+    spatial_location = parse_spatial_location_if_defined(site)
     return models.Location(name, description, spatial_location)
 
-def parse_site_name(agency):
-    return agency.find('Site/Name').text
+def parse_site_name(site):
+    return site.find('Site/Name').text
 
-def parse_site_description(agency):
-    return agency.find('Site/SiteDescription').text
+def parse_site_description(site):
+    return site.find('Site/SiteDescription').text
 
-def parse_spatial_location_if_defined(agency):
-    latitude = agency.find('./Site/SpatialLocation/Latitude')
-    longitude = agency.find('./Site/SpatialLocation/Longitude')
+def parse_spatial_location_if_defined(site):
+    latitude = site.find('./Site/SpatialLocation/Latitude')
+    longitude = site.find('./Site/SpatialLocation/Longitude')
     if latitude is None or longitude is None:
         return None
     return models.SpatialLocation(latitude.text, longitude.text)
