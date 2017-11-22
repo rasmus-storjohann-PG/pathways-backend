@@ -1,13 +1,18 @@
 import xml.etree.ElementTree as etree
 from urllib import parse as urlparse
 from bc211 import models
+import itertools
+
+def read_records_from_file(file):
+    xml = file.read()
+    return parse(xml)
 
 def parse(xml_data_as_string):
     root_xml = etree.fromstring(xml_data_as_string)
     agencies = root_xml.findall('Agency')
     result = models.ParserResult()
     result.organizations = map(parse_agency, agencies)
-    result.locations = map(parse_site, agencies)
+    result.locations = itertools.chain.from_iterable(map(parse_sites, agencies))
     return result
 
 def parse_agency(agency):
@@ -53,14 +58,14 @@ def parse_site(site):
     return models.Location(name, description, spatial_location)
 
 def parse_site_name(site):
-    return site.find('Site/Name').text
+    return site.find('Name').text
 
 def parse_site_description(site):
-    return site.find('Site/SiteDescription').text
+    return site.find('SiteDescription').text
 
 def parse_spatial_location_if_defined(site):
-    latitude = site.find('./Site/SpatialLocation/Latitude')
-    longitude = site.find('./Site/SpatialLocation/Longitude')
+    latitude = site.find('SpatialLocation/Latitude')
+    longitude = site.find('SpatialLocation/Longitude')
     if latitude is None or longitude is None:
         return None
     return models.SpatialLocation(latitude.text, longitude.text)

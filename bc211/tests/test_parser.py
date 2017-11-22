@@ -32,7 +32,7 @@ class BC211ParserTests(unittest.TestCase):
         file_open_for_reading = open(MULTI_AGENCY__211_DATA_SET, 'r')
         xml = file_open_for_reading.read()
         parser_result = parser.parse(xml)
-        self.assertEqual(len(list(parser_result.locations)), 16)
+        self.assertEqual(len(list(parser_result.locations)), 40)
         self.assertEqual(len(list(parser_result.organizations)), 16)
 
 
@@ -67,9 +67,9 @@ class OrganizationParserTests(unittest.TestCase):
 class LocationParserTests(unittest.TestCase):
     def setUp(self):
         root = etree.fromstring(open(REAL_211_DATA_SET, 'r').read())
-        self.from_real_data = parser.parse_site(root.find('Agency'))
+        self.from_real_data = parser.parse_site(root.find('Agency/Site'))
         root = etree.fromstring(MINIMAL_211_DATA_SET)
-        self.from_minimal_data = parser.parse_site(root.find('Agency'))
+        self.from_minimal_data = parser.parse_site(root.find('Agency/Site'))
 
     def test_can_parse_name(self):
         self.assertEqual(self.from_real_data.name, 'Langley Child Development Centre')

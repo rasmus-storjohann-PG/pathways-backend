@@ -1,7 +1,8 @@
 import unittest
 from decimal import Decimal
 from django.test import TestCase
-from bc211.importer import read_records_from_file, save_records_to_database
+from bc211.parser import read_records_from_file
+from bc211.importer import save_records_to_database
 from organizations.models import Organization
 from locations.models import Location
 
@@ -62,10 +63,10 @@ class FullDataImportTests(TestCase):
         self.assertEqual(len(self.all_organizations), 16)
 
     def test_can_import_multiple_locations(self):
-        self.assertEqual(len(self.all_locations), 16)
+        self.assertEqual(len(self.all_locations), 40)
 
     def test_returns_number_of_organizations_imported(self):
         self.assertEqual(self.return_value['number_of_organizations'], 16)
 
     def test_returns_number_of_locations_imported(self):
-        self.assertEqual(self.return_value['number_of_locations'], 16)
+        self.assertEqual(self.return_value['number_of_locations'], 40)

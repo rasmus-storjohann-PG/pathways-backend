@@ -3,10 +3,6 @@ from organizations.models import Organization
 from locations.models import Location
 from django.utils import translation
 
-def read_records_from_file(file):
-    xml = file.read()
-    return parser.parse(xml)
-
 def save_records_to_database(records):
     translation.activate('en')
 

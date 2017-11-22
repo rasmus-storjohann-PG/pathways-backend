@@ -16,7 +16,7 @@ class TestImportBc211Data(TestCase):
     def test_import_many_records(self):
         out = StringIO()
         call_command('import_bc211_data', MULTI_AGENCY_FIXTURE, stdout=out)
-        self.assertIn('Successfully imported 16 organization(s) and 16 location(s)',
+        self.assertIn('Successfully imported 16 organization(s) and 40 location(s)',
                       out.getvalue())
 
     def test_import_invalid_file(self):

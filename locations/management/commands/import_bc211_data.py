@@ -1,6 +1,7 @@
 import argparse
 from django.core.management.base import BaseCommand
-from bc211.importer import read_records_from_file, save_records_to_database
+from bc211.parser import read_records_from_file
+from bc211.importer import save_records_to_database
 
 # invoke as follows:
 # python manage.py import_bc211_data path/to/bc211.xml
