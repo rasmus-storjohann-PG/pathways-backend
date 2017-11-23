@@ -1,16 +1,13 @@
 from bc211 import validators
 
-class ParserResult:
-    organizations = []
-    locations = []
-
 class Organization:
-    def __init__(self, id, name, description, website, email):
+    def __init__(self, id, name, description, website, email, locations):
         self.id = id
         self.name = name
         self.description = description
         self.website = website
         self.email = email
+        self.locations = locations
 
 class Location:
     def __init__(self, name, description, spatial_location):

@@ -1,26 +1,30 @@
-from bc211 import parser
 from organizations.models import Organization
 from locations.models import Location
 from django.utils import translation
 
-def save_records_to_database(records):
+class ImportCounters:
+    def __init__(self):
+        self.organization_count = 0
+        self.location_count = 0
+
+    def count_organization(self):
+        self.organization_count += 1
+
+    def count_location(self):
+        self.location_count += 1
+
+def save_records_to_database(organizations):
     translation.activate('en')
+    counters = ImportCounters()
+    save_organizations(organizations, counters)
+    return counters
 
-    number_of_organizations = save_organizations(records.organizations)
-    number_of_locations = save_locations(records.locations)
-
-    return {
-        'number_of_organizations': number_of_organizations,
-        'number_of_locations': number_of_locations,
-    }
-
-def save_organizations(records):
-    count = 0
-    for record in records:
-        active_record = build_organization_active_record(record)
+def save_organizations(organizations, counters):
+    for organization in organizations:
+        active_record = build_organization_active_record(organization)
         active_record.save()
-        count += 1
-    return count
+        counters.count_organization()
+        save_locations(organization.locations, counters)
 
 def build_organization_active_record(record):
     active_record = Organization()
@@ -31,13 +35,11 @@ def build_organization_active_record(record):
     active_record.email = record.email
     return active_record
 
-def save_locations(records):
-    count = 0
-    for record in records:
-        active_record = build_location_active_record(record)
+def save_locations(locations, counters):
+    for location in locations:
+        active_record = build_location_active_record(location)
         active_record.save()
-        count += 1
-    return count
+        counters.count_location()
 
 def build_location_active_record(record):
     active_record = Location()

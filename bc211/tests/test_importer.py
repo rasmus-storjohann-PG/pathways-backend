@@ -66,7 +66,7 @@ class FullDataImportTests(TestCase):
         self.assertEqual(len(self.all_locations), 40)
 
     def test_returns_number_of_organizations_imported(self):
-        self.assertEqual(self.return_value['number_of_organizations'], 16)
+        self.assertEqual(self.return_value.organization_count, 16)
 
     def test_returns_number_of_locations_imported(self):
-        self.assertEqual(self.return_value['number_of_locations'], 40)
+        self.assertEqual(self.return_value.location_count, 40)

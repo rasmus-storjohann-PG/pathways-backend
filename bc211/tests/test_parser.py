@@ -24,6 +24,14 @@ MINIMAL_211_DATA_SET = '''
                 <Longitude>-154.321</Longitude>
             </SpatialLocation>
         </Site>
+        <Site>
+            <Name>the second site name</Name>
+            <SiteDescription>the second site description</SiteDescription>
+            <SpatialLocation>
+                <Latitude>123.456</Latitude>
+                <Longitude>-154.321</Longitude>
+            </SpatialLocation>
+        </Site>
     </Agency>
 </Source>'''
 
@@ -31,15 +39,17 @@ class BC211ParserTests(unittest.TestCase):
     def test_parse_many_locations(self):
         file_open_for_reading = open(MULTI_AGENCY__211_DATA_SET, 'r')
         xml = file_open_for_reading.read()
-        parser_result = parser.parse(xml)
-        self.assertEqual(len(list(parser_result.locations)), 40)
-        self.assertEqual(len(list(parser_result.organizations)), 16)
+        organizations = list(parser.parse(xml))
+        locations_from_first_organization = list(organizations[0].locations)
+        self.assertEqual(len(organizations), 16)
+        self.assertEqual(len(locations_from_first_organization), 1)
 
 
 class OrganizationParserTests(unittest.TestCase):
     def setUp(self):
         root = etree.fromstring(open(REAL_211_DATA_SET, 'r').read())
         self.from_real_data = parser.parse_agency(root.find('Agency'))
+
         root = etree.fromstring(MINIMAL_211_DATA_SET)
         self.from_minimal_data = parser.parse_agency(root.find('Agency'))
 
@@ -62,6 +72,10 @@ class OrganizationParserTests(unittest.TestCase):
     def test_can_parse_email(self):
         self.assertEqual(self.from_real_data.email, 'info@langleycdc.com')
         self.assertEqual(self.from_minimal_data.email, 'info@the-agency.org')
+
+    def test_can_parse_locations_under_organization(self):
+        self.assertEqual(len(list(self.from_real_data.locations)), 1)
+        self.assertEqual(len(list(self.from_minimal_data.locations)), 2)
 
 
 class LocationParserTests(unittest.TestCase):

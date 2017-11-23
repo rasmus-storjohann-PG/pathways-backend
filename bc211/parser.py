@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as etree
 from urllib import parse as urlparse
 from bc211 import models
-import itertools
 
 def read_records_from_file(file):
     xml = file.read()
@@ -10,10 +9,7 @@ def read_records_from_file(file):
 def parse(xml_data_as_string):
     root_xml = etree.fromstring(xml_data_as_string)
     agencies = root_xml.findall('Agency')
-    result = models.ParserResult()
-    result.organizations = map(parse_agency, agencies)
-    result.locations = itertools.chain.from_iterable(map(parse_sites, agencies))
-    return result
+    return map(parse_agency, agencies)
 
 def parse_agency(agency):
     id = parse_agency_key(agency)
@@ -21,7 +17,8 @@ def parse_agency(agency):
     description = parse_agency_description(agency)
     website = parse_agency_website(agency)
     email = parse_agency_email(agency)
-    return models.Organization(id, name, description, website, email)
+    locations = parse_sites(agency)
+    return models.Organization(id, name, description, website, email, locations)
 
 def parse_agency_key(agency):
     return agency.find('Key').text
