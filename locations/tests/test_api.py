@@ -1,9 +1,11 @@
 from rest_framework import test as rest_test
 from rest_framework import status
 from locations.tests.helpers import LocationBuilder
+from organizations.tests.helpers import OrganizationBuilder
 
 class LocationsApiTests(rest_test.APITestCase):
     def setUp(self):
+        self.organization = OrganizationBuilder().build()
         self.data = {
             'name': 'The name',
             'latitude': 123.456,
@@ -12,15 +14,15 @@ class LocationsApiTests(rest_test.APITestCase):
         }
 
     def test_can_get_entities(self):
-        LocationBuilder().with_name('First').build().save()
-        LocationBuilder().with_name('Second').build().save()
+        LocationBuilder(self.organization).with_name('First').build().save()
+        LocationBuilder(self.organization).with_name('Second').build().save()
         url = '/v1/locations/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.json()), 2)
 
     def test_can_get_one_entity(self):
-        location = LocationBuilder().with_description('Location description').build()
+        location = LocationBuilder(self.organization).with_description('Location description').build()
         location.save()
         url = '/v1/locations/{0}/'.format(location.pk)
         response = self.client.get(url)
@@ -33,14 +35,14 @@ class LocationsApiTests(rest_test.APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_cannot_put(self):
-        location = LocationBuilder().build()
+        location = LocationBuilder(self.organization).build()
         location.save()
         url = '/v1/locations/{0}/'.format(location.pk)
         response = self.client.put(url, self.data)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_cannot_delete(self):
-        location = LocationBuilder().build()
+        location = LocationBuilder(self.organization).build()
         location.save()
         url = '/v1/locations/{0}/'.format(location.pk)
         response = self.client.delete(url)
