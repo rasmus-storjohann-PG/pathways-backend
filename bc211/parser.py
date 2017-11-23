@@ -17,7 +17,7 @@ def parse_agency(agency):
     description = parse_agency_description(agency)
     website = parse_agency_website(agency)
     email = parse_agency_email(agency)
-    locations = parse_sites(agency)
+    locations = parse_sites(agency, id)
     return dtos.Organization(id, name, description, website, email, locations)
 
 def parse_agency_key(agency):
@@ -44,15 +44,22 @@ def website_with_http_prefix(website):
     url_with_extra_slash = urlparse.urlunparse(parts)
     return url_with_extra_slash.replace('///', '//')
 
-def parse_sites(agency):
+def parse_sites(agency, organization_id):
     sites = agency.findall('Site')
-    return map(parse_site, sites)
+    return map(SiteParser(organization_id), sites)
 
-def parse_site(site):
+class SiteParser:
+    def __init__(self, organization_id):
+        self.organization_id = organization_id
+
+    def __call__(self, site):
+        return parse_site(site, self.organization_id)
+
+def parse_site(site, organization_id):
     name = parse_site_name(site)
     description = parse_site_description(site)
     spatial_location = parse_spatial_location_if_defined(site)
-    return dtos.Location(name, description, spatial_location)
+    return dtos.Location(name, organization_id, description, spatial_location)
 
 def parse_site_name(site):
     return site.find('Name').text

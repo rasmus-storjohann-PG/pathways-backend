@@ -81,9 +81,10 @@ class OrganizationParserTests(unittest.TestCase):
 class LocationParserTests(unittest.TestCase):
     def setUp(self):
         root = etree.fromstring(open(REAL_211_DATA_SET, 'r').read())
-        self.from_real_data = parser.parse_site(root.find('Agency/Site'))
+        self.organization_id = 'the organization id'
+        self.from_real_data = parser.parse_site(root.find('Agency/Site'), self.organization_id)
         root = etree.fromstring(MINIMAL_211_DATA_SET)
-        self.from_minimal_data = parser.parse_site(root.find('Agency/Site'))
+        self.from_minimal_data = parser.parse_site(root.find('Agency/Site'), self.organization_id)
 
     def test_can_parse_name(self):
         self.assertEqual(self.from_real_data.name, 'Langley Child Development Centre')
@@ -100,3 +101,7 @@ class LocationParserTests(unittest.TestCase):
     def test_can_parse_longitude(self):
         self.assertAlmostEqual(self.from_real_data.spatial_location.longitude, -122.607918)
         self.assertAlmostEqual(self.from_minimal_data.spatial_location.longitude, -154.321)
+
+    def test_sets_the_organization_id(self):
+        self.assertEqual(self.from_real_data.organization_id, self.organization_id)
+        self.assertEqual(self.from_minimal_data.organization_id, self.organization_id)
