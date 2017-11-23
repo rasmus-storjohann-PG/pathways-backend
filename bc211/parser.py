@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as etree
 from urllib import parse as urlparse
-from bc211 import models
+from bc211 import dtos
 
 def read_records_from_file(file):
     xml = file.read()
@@ -18,7 +18,7 @@ def parse_agency(agency):
     website = parse_agency_website(agency)
     email = parse_agency_email(agency)
     locations = parse_sites(agency)
-    return models.Organization(id, name, description, website, email, locations)
+    return dtos.Organization(id, name, description, website, email, locations)
 
 def parse_agency_key(agency):
     return agency.find('Key').text
@@ -52,7 +52,7 @@ def parse_site(site):
     name = parse_site_name(site)
     description = parse_site_description(site)
     spatial_location = parse_spatial_location_if_defined(site)
-    return models.Location(name, description, spatial_location)
+    return dtos.Location(name, description, spatial_location)
 
 def parse_site_name(site):
     return site.find('Name').text
@@ -65,4 +65,4 @@ def parse_spatial_location_if_defined(site):
     longitude = site.find('SpatialLocation/Longitude')
     if latitude is None or longitude is None:
         return None
-    return models.SpatialLocation(latitude.text, longitude.text)
+    return dtos.SpatialLocation(latitude.text, longitude.text)
