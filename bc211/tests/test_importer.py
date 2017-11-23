@@ -24,10 +24,10 @@ class LocationImportTests(TestCase):
         self.assertEqual(self.location.description[:30], 'Provides inclusive, family-cen')
 
     def test_can_import_latitude(self):
-        self.assertEqual(self.location.latitude, Decimal('49.087284'))
+        self.assertAlmostEqual(self.location.latitude, 49.087284)
 
     def test_can_import_longitude(self):
-        self.assertEqual(self.location.longitude, Decimal('-122.607918'))
+        self.assertAlmostEqual(self.location.longitude, -122.607918)
 
 
 class OrganizationImportTests(TestCase):

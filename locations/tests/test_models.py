@@ -17,18 +17,18 @@ class TestLocationModel(TestCase):
         self.assertEqual(location_from_db.name, name)
 
     def test_has_latitude(self):
-        latitude = Decimal('123.456')
+        latitude = 123.456
         location = LocationBuilder(self.organization).with_latitude(latitude).build()
         location.save()
         location_from_db = models.Location.objects.get()
-        self.assertEqual(location_from_db.latitude, latitude)
+        self.assertAlmostEquals(location_from_db.latitude, latitude)
 
     def test_has_longitude(self):
-        longitude = Decimal('234.567')
+        longitude = 234.567
         location = LocationBuilder(self.organization).with_longitude(longitude).build()
         location.save()
         location_from_db = models.Location.objects.get()
-        self.assertEqual(location_from_db.longitude, longitude)
+        self.assertAlmostEqual(location_from_db.longitude, longitude)
 
     def test_can_set_description(self):
         description = 'The location description'
