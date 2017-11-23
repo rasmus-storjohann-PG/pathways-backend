@@ -43,6 +43,7 @@ def save_locations(locations, counters):
 
 def build_location_active_record(record):
     active_record = Location()
+    active_record.id = record.id
     active_record.name = record.name
     active_record.organization_id = record.organization_id
     has_location = record.spatial_location is not None

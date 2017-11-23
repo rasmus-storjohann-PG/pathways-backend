@@ -1,5 +1,10 @@
 from django.db import models
+from django.core import validators
 from parler.models import TranslatableModel
+
+def contains_no_spaces():
+    return validators.RegexValidator(regex=r'^[^ ]+$')
+
 
 class ValidatingModel(TranslatableModel):
     class Meta:

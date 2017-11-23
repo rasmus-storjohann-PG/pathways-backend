@@ -56,10 +56,14 @@ class SiteParser:
         return parse_site(site, self.organization_id)
 
 def parse_site(site, organization_id):
+    id = parse_site_id(site)
     name = parse_site_name(site)
     description = parse_site_description(site)
     spatial_location = parse_spatial_location_if_defined(site)
-    return dtos.Location(name, organization_id, description, spatial_location)
+    return dtos.Location(id, name, organization_id, description, spatial_location)
+
+def parse_site_id(site):
+    return site.find('Key').text
 
 def parse_site_name(site):
     return site.find('Name').text

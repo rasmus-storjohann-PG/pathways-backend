@@ -17,6 +17,7 @@ MINIMAL_211_DATA_SET = '''
             <Address>info@the-agency.org</Address>
         </Email>
         <Site>
+            <Key>the site key</Key>
             <Name>the site name</Name>
             <SiteDescription>the site description</SiteDescription>
             <SpatialLocation>
@@ -25,6 +26,7 @@ MINIMAL_211_DATA_SET = '''
             </SpatialLocation>
         </Site>
         <Site>
+            <Key>the second site key</Key>
             <Name>the second site name</Name>
             <SiteDescription>the second site description</SiteDescription>
             <SpatialLocation>

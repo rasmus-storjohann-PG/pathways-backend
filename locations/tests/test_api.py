@@ -6,6 +6,7 @@ from organizations.tests.helpers import OrganizationBuilder
 class LocationsApiTests(rest_test.APITestCase):
     def setUp(self):
         self.organization = OrganizationBuilder().build()
+        self.organization.save()
         self.data = {
             'name': 'The name',
             'latitude': 123.456,
@@ -14,8 +15,8 @@ class LocationsApiTests(rest_test.APITestCase):
         }
 
     def test_can_get_entities(self):
-        LocationBuilder(self.organization).with_name('First').build().save()
-        LocationBuilder(self.organization).with_name('Second').build().save()
+        LocationBuilder(self.organization).with_id('First').build().save()
+        LocationBuilder(self.organization).with_id('Second').build().save()
         url = '/v1/locations/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

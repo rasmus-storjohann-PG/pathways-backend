@@ -3,11 +3,16 @@ from locations import models
 
 class LocationBuilder:
     def __init__(self, organization):
+        self.id = 'the_default_id'
         self.organization = organization
         self.name = 'default name'
         self.latitude = Decimal('0.0')
         self.longitude = Decimal('0.0')
         self.description = 'default description'
+
+    def with_id(self, id):
+        self.id = id
+        return self
 
     def with_name(self, name):
         self.name = name
@@ -27,6 +32,7 @@ class LocationBuilder:
 
     def build(self):
         result = models.Location()
+        result.id = self.id
         result.name = self.name
         result.organization = self.organization
         result.latitude = self.latitude

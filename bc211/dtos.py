@@ -10,7 +10,8 @@ class Organization:
         self.locations = locations
 
 class Location:
-    def __init__(self, name, organization_id, description, spatial_location):
+    def __init__(self, id, name, organization_id, description, spatial_location):
+        self.id = id
         self.name = name
         self.organization_id = organization_id
         self.description = description
