@@ -7,6 +7,10 @@ def contains_no_spaces():
 
 
 class ValidatingModel(TranslatableModel):
+    """Database model class which calls full_clean() from save(), to help
+    ensure that no invalid data gets into the database. full_clean() replaces
+    all empty values (including '') with None, which are saves as NULL,so there
+    should be no empty strings in the database."""
     class Meta:
         abstract = True
 
