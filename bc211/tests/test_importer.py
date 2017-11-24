@@ -1,10 +1,13 @@
 import unittest
+import logging
 from decimal import Decimal
 from django.test import TestCase
 from bc211.parser import read_records_from_file
 from bc211.importer import save_records_to_database
 from organizations.models import Organization
 from locations.models import Location
+
+logging.disable(logging.ERROR)
 
 ONE_AGENCY_FIXTURE = 'bc211/data/BC211_data_one_agency.xml'
 MULTI_AGENCY_FIXTURE = 'bc211/data/BC211_data_excerpt.xml'

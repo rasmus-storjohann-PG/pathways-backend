@@ -1,6 +1,9 @@
+import logging
 import xml.etree.ElementTree as etree
 from urllib import parse as urlparse
 from bc211 import dtos
+
+LOGGER = logging.getLogger(__name__)
 
 def read_records_from_file(file):
     xml = file.read()
@@ -17,6 +20,7 @@ def parse_agency(agency):
     description = parse_agency_description(agency)
     website = parse_agency_website(agency)
     email = parse_agency_email(agency)
+    LOGGER.info('Parsed organization: %s %s', id, name)
     locations = parse_sites(agency, id)
     return dtos.Organization(id, name, description, website, email, locations)
 
@@ -60,6 +64,7 @@ def parse_site(site, organization_id):
     name = parse_site_name(site)
     description = parse_site_description(site)
     spatial_location = parse_spatial_location_if_defined(site)
+    LOGGER.info('Parsed location: %s %s', id, name)
     return dtos.Location(id, name, organization_id, description, spatial_location)
 
 def parse_site_id(site):

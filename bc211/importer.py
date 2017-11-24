@@ -1,6 +1,9 @@
+import logging
 from organizations.models import Organization
 from locations.models import Location
 from django.utils import translation
+
+LOGGER = logging.getLogger(__name__)
 
 class ImportCounters:
     def __init__(self):
@@ -24,6 +27,7 @@ def save_organizations(organizations, counters):
         active_record = build_organization_active_record(organization)
         active_record.save()
         counters.count_organization()
+        LOGGER.info('Imported organization: %s %s', organization.id, organization.name)
         save_locations(organization.locations, counters)
 
 def build_organization_active_record(record):
@@ -40,6 +44,7 @@ def save_locations(locations, counters):
         active_record = build_location_active_record(location)
         active_record.save()
         counters.count_location()
+        LOGGER.info('Imported location: %s %s', location.id, location.name)
 
 def build_location_active_record(record):
     active_record = Location()

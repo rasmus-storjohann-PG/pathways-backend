@@ -72,6 +72,10 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'INFO',
         },
+        'bc211': {
+            'handlers': ['verbose-console'],
+            'level': 'DEBUG',
+        },
         'polls': {
             'handlers': ['verbose-console'],
             'level': 'DEBUG',

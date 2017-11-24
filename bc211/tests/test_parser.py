@@ -1,6 +1,9 @@
 import unittest
+import logging
 import xml.etree.ElementTree as etree
 from bc211 import parser
+
+logging.disable(logging.ERROR)
 
 REAL_211_DATA_SET = 'bc211/data/BC211_data_one_agency.xml'
 MULTI_AGENCY__211_DATA_SET = 'bc211/data/BC211_data_excerpt.xml'
@@ -83,10 +86,12 @@ class OrganizationParserTests(unittest.TestCase):
 class LocationParserTests(unittest.TestCase):
     def setUp(self):
         root = etree.fromstring(open(REAL_211_DATA_SET, 'r').read())
-        self.organization_id = 'the organization id'
-        self.from_real_data = parser.parse_site(root.find('Agency/Site'), self.organization_id)
+        self.organization_id_passed_to_parser = 'the organization id'
+        self.from_real_data = parser.parse_site(root.find('Agency/Site'),
+                                                self.organization_id_passed_to_parser)
         root = etree.fromstring(MINIMAL_211_DATA_SET)
-        self.from_minimal_data = parser.parse_site(root.find('Agency/Site'), self.organization_id)
+        self.from_minimal_data = parser.parse_site(root.find('Agency/Site'),
+                                                   self.organization_id_passed_to_parser)
 
     def test_can_parse_name(self):
         self.assertEqual(self.from_real_data.name, 'Langley Child Development Centre')
@@ -105,5 +110,7 @@ class LocationParserTests(unittest.TestCase):
         self.assertAlmostEqual(self.from_minimal_data.spatial_location.longitude, -154.321)
 
     def test_sets_the_organization_id(self):
-        self.assertEqual(self.from_real_data.organization_id, self.organization_id)
-        self.assertEqual(self.from_minimal_data.organization_id, self.organization_id)
+        self.assertEqual(self.from_real_data.organization_id,
+                         self.organization_id_passed_to_parser)
+        self.assertEqual(self.from_minimal_data.organization_id,
+                         self.organization_id_passed_to_parser)
