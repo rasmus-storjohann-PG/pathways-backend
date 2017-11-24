@@ -63,25 +63,36 @@ class TestLocationModel(TestCase):
         location_from_db = validate_save_and_reload(location)
         self.assertAlmostEquals(location_from_db.latitude, latitude)
 
-    def test_latitude_can_be_null(self):
-        null_latitude = None
-        location = LocationBuilder(self.organization).with_latitude(null_latitude).build()
-        location_from_db = validate_save_and_reload(location)
-        self.assertEquals(location_from_db.latitude, null_latitude)
-
-    # TODO lat or long cannot be none
-
     def test_has_longitude(self):
         longitude = 234.567
         location = LocationBuilder(self.organization).with_longitude(longitude).build()
         location_from_db = validate_save_and_reload(location)
         self.assertAlmostEqual(location_from_db.longitude, longitude)
 
-    def test_longitude_can_be_null(self):
-        null_longitude = None
-        location = LocationBuilder(self.organization).with_longitude(null_longitude).build()
+    def test_latitude_and_longitude_can_both_be_null(self):
+        location = (LocationBuilder(self.organization)
+                    .with_latitude(None)
+                    .with_longitude(None)
+                    .build())
         location_from_db = validate_save_and_reload(location)
-        self.assertEqual(location_from_db.longitude, null_longitude)
+        self.assertEquals(location_from_db.latitude, None)
+        self.assertEquals(location_from_db.longitude, None)
+
+    def test_only_latitude_cannot_be_null(self):
+        location = (LocationBuilder(self.organization)
+                    .with_latitude(None)
+                    .with_longitude(0.0)
+                    .build())
+        with self.assertRaises(exceptions.ValidationError):
+            location.full_clean()
+
+    def test_only_longitude_cannot_be_null(self):
+        location = (LocationBuilder(self.organization)
+                    .with_latitude(0.0)
+                    .with_longitude(None)
+                    .build())
+        with self.assertRaises(exceptions.ValidationError):
+            location.full_clean()
 
     def test_can_set_description(self):
         description = 'The location description'

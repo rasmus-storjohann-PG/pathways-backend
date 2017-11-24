@@ -4,4 +4,4 @@ from locations import models
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Location
-        fields = ('pk', 'name', 'latitude', 'longitude', 'description')
+        fields = ('id', 'name', 'organization_id', 'latitude', 'longitude', 'description')
