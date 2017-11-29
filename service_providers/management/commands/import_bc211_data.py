@@ -17,7 +17,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         path = options['file']
         records = read_records_from_file(path)
-        number_of_records = save_records_to_database(records)
+        counts = save_records_to_database(records)
 
-        status_message = 'Successfully imported {0} record(s)'.format(number_of_records)
+        message_template = 'Successfully imported {0} organization(s) and {1} service providers(s)'
+        status_message = message_template.format(counts['number_of_organizations'],
+                                                 counts['number_of_service_providers'])
         self.stdout.write(self.style.SUCCESS(status_message))
