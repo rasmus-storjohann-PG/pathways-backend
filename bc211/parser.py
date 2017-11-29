@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as etree
+from urllib import parse as urlparse
 from bc211 import models
 
 def parse(xml_data_as_string):
@@ -53,6 +54,6 @@ def parse_website(agency_xml):
     return website_with_http_prefix(website.text)
 
 def website_with_http_prefix(website):
-    if website.startswith('http'):
-        return website
-    return 'http://' + website
+    parts = urlparse.urlparse(website, 'http')
+    url_with_extra_slash = urlparse.urlunparse(parts)
+    return url_with_extra_slash.replace('///', '//')

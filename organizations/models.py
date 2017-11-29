@@ -1,6 +1,6 @@
 from django.db import models
 from django.core import validators
-from parler.models import TranslatableModel, TranslatedFields
+from parler.models import TranslatedFields
 from common.models import ValidatingModel, RequiredCharField, OptionalCharField
 
 def contains_no_spaces():
@@ -16,4 +16,4 @@ class Organization(ValidatingModel):
     )
 
     def __str__(self):
-        return self.id
+        return self.name
