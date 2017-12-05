@@ -6,41 +6,83 @@ At this stage, our focus is on establishing the server architecture and testing 
 
 ## Getting started
 
+Clone the repository
+
+```
+git@github.com:pg-irc/pathways-backend.git
+```
+
 Set up and activate a python v3 environment
 
 ```
-python3 -m venv PW
-source ./PW/bin/activate
+python3 -m venv cookies_env
+source cookies_env/bin/activate
 ```
 
-Clone the repository:
+Install the required python libraries for local development
 
 ```
-git clone https://github.com/pg-irc/pathways-backend.git
 cd pathways-backend/
+pip install -r requirements/local.txt
 ```
 
-Install required libraries in the python environment created above:
+Create the database tables. For local development, sqlite is the database implementation, for production, postgres is used.
 
-`pip install -r requirements.txt`
-
-Create database tables -- note that we are using SqlLite for now, the plan is to deploy on Postgres:
-
-`python manage.py migrate`
+```
+python manage.py migrate
+```
 
 Create the django administration account:
 
-`python manage.py createsuperuser`
+```
+python manage.py createsuperuser
+```
 
 Run the unit tests
 
-`python manage.py test`
+```
+python manage.py test
+```
 
 Start the API server
 
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 
 You should now be able to access the server at http://127.0.0.1:8000/v1/. The Django admin tool is at http://127.0.0.1:8000/v1/admin/, and the question and choice entities are available at http://127.0.0.1:8000/v1/questions/ and http://127.0.0.1:8000/v1/questions/1/choices/.
+
+Import BC-211 data
+
+```
+python manage.py import_bc211_data ~/path/to/AIRSXML_2252_Export_20170109050136__211.xml
+
+```
+
+## Getting started with docker
+
+Create and launch the docker containers for local development
+
+```
+docker-compose -f compose-local.yml build
+```
+
+Set up the database inside the container
+
+
+```
+docker-compose -f compose-local.yml run django python manage.py migrate
+docker-compose -f compose-local.yml run django python manage.py createsuperuser
+```
+
+Launch the container
+
+
+```
+docker-compose -f compose-local.yml up
+```
+
+and check out http://localhost:8000/ to see if it worked. See https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html for more details.
 
 ## Development
 
