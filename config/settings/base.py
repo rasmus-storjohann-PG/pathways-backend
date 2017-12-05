@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (pathways/config/settings/base.py - 3 = pathways/)
-APPS_DIR = ROOT_DIR.path('pathways')
+APPS_DIR = ROOT_DIR.path('main')
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()
@@ -62,7 +62,7 @@ LOCAL_APPS = [
     'locations.apps.LocationsConfig',
     'organizations.apps.OrganizationsConfig',
     'search.apps.SearchConfig',
-    'pathways.users.apps.UsersConfig',
+    'main.users.apps.UsersConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -85,7 +85,7 @@ MIDDLEWARE = [
 # MIGRATIONS CONFIGURATION
 # ------------------------------------------------------------------------------
 MIGRATION_MODULES = {
-    'sites': 'pathways.contrib.sites.migrations'
+    'sites': 'main.contrib.sites.migrations'
 }
 
 # DEBUG
@@ -318,8 +318,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
-ACCOUNT_ADAPTER = 'pathways.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'pathways.users.adapters.SocialAccountAdapter'
+ACCOUNT_ADAPTER = 'main.users.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'main.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model
