@@ -1,10 +1,6 @@
 from django.db import models
 from django.core import validators
 
-def contains_no_spaces():
-    return validators.RegexValidator(regex=r'^[^ ]+$')
-
-
 class ValidateOnSaveMixin(object):
     """Database model mixin which calls full_clean() from save(), to help
     ensure that no invalid data gets into the database. full_clean() replaces

@@ -1,11 +1,11 @@
 from django.db import models
-from django.core import exceptions
+from django.core import exceptions, validators
 from parler.models import TranslatableModel, TranslatedFields
 from organizations.models import Organization
-from common.models import ValidateOnSaveMixin, RequiredCharField, contains_no_spaces
+from common.models import ValidateOnSaveMixin, RequiredCharField
 
 class Location(ValidateOnSaveMixin, TranslatableModel):
-    id = RequiredCharField(primary_key=True, max_length=200, validators=[contains_no_spaces()])
+    id = RequiredCharField(primary_key=True, max_length=200, validators=[validators.validate_slug])
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
