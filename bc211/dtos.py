@@ -1,23 +1,25 @@
-from bc211 import validators
+from bc211 import validate
 
 class Organization:
-    def __init__(self, id, name, description, website, email, locations):
-        self.id = id
-        self.name = name
-        self.description = description
-        self.website = website
-        self.email = email
-        self.locations = locations
+    def __init__(self, **kwargs):
+        self.id = validate.required_string('id', kwargs)
+        self.name = validate.required_string('name', kwargs)
+        self.description = validate.optional_string('description', kwargs)
+        self.website = validate.optional_string('website', kwargs)
+        self.email = validate.optional_string('email', kwargs)
+        self.locations = kwargs['locations']
+
 
 class Location:
-    def __init__(self, id, name, organization_id, description, spatial_location):
-        self.id = id
-        self.name = name
-        self.organization_id = organization_id
-        self.description = description
-        self.spatial_location = spatial_location
+    def __init__(self, **kwargs):
+        self.id = validate.required_string('id', kwargs)
+        self.name = validate.required_string('name', kwargs)
+        self.organization_id = validate.required_string('organization_id', kwargs)
+        self.description = validate.optional_string('description', kwargs)
+        self.spatial_location = validate.optional_object(SpatialLocation, 'spatial_location', kwargs)
+
 
 class SpatialLocation:
-    def __init__(self, latitude, longitude):
-        self.latitude = validators.validate_float(latitude)
-        self.longitude = validators.validate_float(longitude)
+    def __init__(self, **kwargs):
+        self.latitude = validate.required_float('latitude', kwargs)
+        self.longitude = validate.required_float('longitude', kwargs)

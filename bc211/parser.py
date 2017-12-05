@@ -22,7 +22,8 @@ def parse_agency(agency):
     email = parse_agency_email(agency)
     LOGGER.info('Parsed organization: %s %s', id, name)
     locations = parse_sites(agency, id)
-    return dtos.Organization(id, name, description, website, email, locations)
+    return dtos.Organization(id=id, name=name, description=description, website=website,
+                             email=email, locations=locations)
 
 def parse_agency_key(agency):
     return agency.find('Key').text
@@ -65,7 +66,8 @@ def parse_site(site, organization_id):
     description = parse_site_description(site)
     spatial_location = parse_spatial_location_if_defined(site)
     LOGGER.info('Parsed location: %s %s', id, name)
-    return dtos.Location(id, name, organization_id, description, spatial_location)
+    return dtos.Location(id=id, name=name, organization_id=organization_id,
+                         description=description, spatial_location=spatial_location)
 
 def parse_site_id(site):
     return site.find('Key').text
@@ -81,4 +83,4 @@ def parse_spatial_location_if_defined(site):
     longitude = site.find('SpatialLocation/Longitude')
     if latitude is None or longitude is None:
         return None
-    return dtos.SpatialLocation(latitude.text, longitude.text)
+    return dtos.SpatialLocation(latitude=latitude.text, longitude=longitude.text)
