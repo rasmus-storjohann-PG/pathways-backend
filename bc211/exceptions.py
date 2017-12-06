@@ -6,10 +6,10 @@ class InvalidFloatXmlParseException(Exception):
     def __init__(self, *args, **kwargs):
         Exception.__init__(self, *args, **kwargs)
 
-class MissingStringXmlParseException(Exception):
+class InvalidNestedObjectXmlParseException(Exception):
     def __init__(self, *args, **kwargs):
         Exception.__init__(self, *args, **kwargs)
 
-class InvalidNestedObjectXmlParseException(Exception):
+class MissingRequiredFieldXmlParseException(Exception):
     def __init__(self, *args, **kwargs):
         Exception.__init__(self, *args, **kwargs)

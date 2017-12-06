@@ -2,6 +2,7 @@ import logging
 import xml.etree.ElementTree as etree
 from urllib import parse as urlparse
 from bc211 import dtos
+from bc211.exceptions import MissingRequiredFieldXmlParseException
 
 LOGGER = logging.getLogger(__name__)
 

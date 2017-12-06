@@ -3,24 +3,24 @@ from bc211 import dtos, exceptions
 
 class TestOrganization(unittest.TestCase):
     def test_throws_on_missing_id(self):
-        with self.assertRaises(exceptions.MissingStringXmlParseException):
+        with self.assertRaises(exceptions.MissingRequiredFieldXmlParseException):
             dtos.Organization(name='name')
 
     def test_throws_on_missing_name(self):
-        with self.assertRaises(exceptions.MissingStringXmlParseException):
+        with self.assertRaises(exceptions.MissingRequiredFieldXmlParseException):
             dtos.Organization(id='id')
 
 class TestLocation(unittest.TestCase):
     def test_throws_on_missing_id(self):
-        with self.assertRaises(exceptions.MissingStringXmlParseException):
+        with self.assertRaises(exceptions.MissingRequiredFieldXmlParseException):
             dtos.Location(name='name', organization_id='organization_id')
 
     def test_throws_on_missing_name(self):
-        with self.assertRaises(exceptions.MissingStringXmlParseException):
+        with self.assertRaises(exceptions.MissingRequiredFieldXmlParseException):
             dtos.Location(id='id', organization_id='organization_id')
 
     def test_throws_on_missing_organization_id(self):
-        with self.assertRaises(exceptions.MissingStringXmlParseException):
+        with self.assertRaises(exceptions.MissingRequiredFieldXmlParseException):
             dtos.Location(id='id', name='name')
 
 
